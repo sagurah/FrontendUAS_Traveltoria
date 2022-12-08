@@ -11,12 +11,17 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/landingPage",
+            path: "/",
             name: "LandingPage",
             component: importComponent("LandingPage"),
         },
         {
-            path: "/",
+            path: "/login",
+            name: "LoginPage",
+            component: importComponent("LoginPage"),
+        },
+        {
+            path: "/dashboard",
             name: "DashboardLayout",
             component: importComponent("DashboardLayout"),
             children : [
@@ -26,7 +31,7 @@ const router = new VueRouter({
                     component: importComponent(""),
                 }
             ]
-        }
+        },
     ]
 })
 

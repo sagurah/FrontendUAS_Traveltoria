@@ -5,7 +5,7 @@
             <v-spacer></v-spacer>
             <v-toolbar-items>
                 <v-btn flat>Contact Us</v-btn>
-                <v-btn flat class="blue lighten-3">Sign In</v-btn>
+                <v-btn flat class="blue lighten-3"> <router-link :to="{name: 'LoginPage'}" style="text-decoration: none; color: inherit;" >Sign In</router-link></v-btn>
             </v-toolbar-items>
         </v-toolbar>
         <v-content>
