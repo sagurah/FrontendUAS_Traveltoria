@@ -21,6 +21,11 @@ const router = new VueRouter({
             component: importComponent("LoginPage"),
         },
         {
+            path: "/register",
+            name: "RegisterPage",
+            component: importComponent("RegisterPage"),
+        },
+        {
             path: "/dashboard",
             name: "DashboardLayout",
             component: importComponent("DashboardLayout"),

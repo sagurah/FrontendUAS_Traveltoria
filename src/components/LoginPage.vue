@@ -6,7 +6,7 @@
         </v-toolbar>
         <v-content>
             <section>
-                <v-row no-gutters class="ma-15" justify="center">
+                <v-row no-gutters class="ma-15" justify="center" align="center">
                     <v-col cols="10" sm="6" md="4">
                         <v-card class="pa-5">
                             <v-card-title class="font-weight-bold">Selamat datang kembali</v-card-title>
@@ -18,7 +18,7 @@
                             <v-card-actions>
                                 <v-btn block color="primary" elevation="2" small x-small> Masuk</v-btn>
                             </v-card-actions>
-                            <v-card-subtitle>Belum memiliki akun?<v-btn plain color="#00008B" small x-small text>Daftar</v-btn> </v-card-subtitle>
+                            <v-card-subtitle>Belum memiliki akun?<v-btn @click="movepage('/register')"  plain color="#00008B" small x-small text>Daftar </v-btn> </v-card-subtitle>
                         </v-card>
                     </v-col>
                     <v-col cols="10" sm="6" md="6">
@@ -48,6 +48,15 @@
         ],
         }
     },
+    setup() {
+
+    },
+    methods: {
+        movepage(link) {
+            this.$router.push(link) 
+            this.window.location.reload()
+        }
+    }
 }
 </script>
 <style>
