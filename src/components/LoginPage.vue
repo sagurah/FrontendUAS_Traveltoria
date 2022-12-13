@@ -1,7 +1,11 @@
 <template>
     <v-app>
         <v-toolbar max-height="65" class="blue lighten-5" flat>
-            <v-toolbar-title class="mx-0 blue darken-1" style="padding: 5px; color: white;"><router-link :to="{name: 'LandingPage'}" style="text-decoration: none; color: inherit;" >Travel - X</router-link> </v-toolbar-title>
+            <v-toolbar-title class="mx-0" style="padding: 5px;">
+                <router-link :to="{name: 'LandingPage'}" style="text-decoration: none; color: inherit;">
+                    <img src="@/assets/logo.png" alt="logo" width="150px" class="mt-2">
+                </router-link>
+            </v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
         <v-content>
