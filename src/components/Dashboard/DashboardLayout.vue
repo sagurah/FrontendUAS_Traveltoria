@@ -13,7 +13,7 @@
                         <v-icon color="teal darken-3">{{ menu.icon }}</v-icon>
                     </v-list-item-icon>
                     <v-list-item-content>
-                        <v-list-item-title style="color:#26A69A; font-size: 110.5%; font-weight: 600;">{{ menu.title }}</v-list-item-title>
+                        <v-list-item-title style="color:#26A69A; font-size: 120%; font-weight: 600;">{{ menu.title }}</v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
                 <v-spacer></v-spacer>
@@ -27,10 +27,10 @@
         <v-app-bar app fixed height="80%" color="#FFFF">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-spacer></v-spacer>
-            <span style="background-color: #00897B; color:white; padding: 3px; font-size:120%;">
-                <b>Traveltoria</b>
+            <span style="background-color: #00897B; color:white; padding: 3px; font:arial; font-size:120%;">
+                <b>TRAVELTORIA</b>
             </span>
-            <span style="padding-left:5px;">- One Stop Travel Solution!</span>
+            <span style="padding-left:5px;">One Stop Travel Solution!</span>
         </v-app-bar>
         <div style="min-height: 100vh !important;">
             <router-view></router-view>
@@ -45,9 +45,9 @@ export default {
         return {
             drawer: true,
             menus: [
-                {title: 'Kereta', icon: 'mdi-train', to:'/album'},
-                {title: 'Pesawat', icon: 'mdi-airplane', to:'/album'},
-                {title: 'Bus', icon: 'mdi-bus', to:'/album'},
+                { title: 'Kereta', icon: 'mdi-train', to: '/album' },
+                { title: 'Pesawat', icon: 'mdi-airplane', to: '/album' },
+                { title: 'Bus', icon: 'mdi-bus', to: '/album' },
             ]
         }
     }
