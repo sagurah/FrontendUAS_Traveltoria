@@ -34,11 +34,12 @@ const router = new VueRouter({
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
                 {
-                    path: "/dash",
+                    path: "/",
                     name: "DashboardMain",
                     meta: {title: "Dashboard"},
-                    component: importComponent("DashboardMain"),
+                    component: importComponent("Dashboard/DashboardMain"),
                 },
+                
             ]
         },
     ]
