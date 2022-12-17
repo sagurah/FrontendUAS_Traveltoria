@@ -3,9 +3,10 @@
         <v-navigation-drawer app v-model="drawer" width="16%" color="teal lighten-5" hide-overlay>
             <v-list-item>
                 <v-list-item-content>
-                    <v-img :src="require('@/assets/logo.png')" style="filter: drop-shadow(3px 2px 5px #00897B);" contain max-height="90">
-                        <router-link :to="{name: 'DashboardMain'}" style="text-decoration: none; color: inherit;"></router-link>
-                    </v-img>
+                    <v-card color="teal lighten-5" flat to="/">
+                        <v-img :src="require('@/assets/logo.png')" style="filter: drop-shadow(3px 2px 5px #00897B);" contain max-height="90">
+                        </v-img>
+                    </v-card>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -50,8 +51,8 @@ export default {
                 { title: 'Kereta', icon: 'mdi-train', to: '/kereta' },
                 { title: 'Pesawat', icon: 'mdi-airplane', to: '/pesawat' },
                 { title: 'Bus', icon: 'mdi-bus', to: '/bus' },
-            ]
+            ],
         }
-    }
+    },
 }
 </script>
