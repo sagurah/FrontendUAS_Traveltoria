@@ -13,7 +13,7 @@
             <v-list class="mt-2" nav>
                 <v-chip class="mx-3" color="teal" style="color:white;">
                     <span><strong>Menus</strong></span>
-                </v-chip>p
+                </v-chip>
                 <v-list-item class="my-2" v-for="menu in menus" :key="menu.title" link tag="router-link" :to="menu.to">
                     <v-list-item-icon>
                         <v-icon color="teal darken-3">{{ menu.icon }}</v-icon>
