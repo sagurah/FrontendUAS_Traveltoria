@@ -39,7 +39,24 @@ const router = new VueRouter({
                     meta: {title: "Dashboard"},
                     component: importComponent("Dashboard/DashboardMain"),
                 },
-                
+                {
+                    path: "/kereta",
+                    name: "KeretaView",
+                    meta: {title: "TRAVELTORIA - Kereta"},
+                    component: importComponent("Views/KeretaView"),
+                },
+                {
+                    path: "/pesawat",
+                    name: "PesawatView",
+                    meta: {title: "TRAVELTORIA - Pesawat"},
+                    component: importComponent("Views/PesawatView"),
+                },
+                {
+                    path: "/bus",
+                    name: "BusView",
+                    meta: {title: "TRAVELTORIA - Bus"},
+                    component: importComponent("Views/BusView"),
+                }
             ]
         },
     ]

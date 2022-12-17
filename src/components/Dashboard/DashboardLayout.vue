@@ -1,9 +1,11 @@
 <template>
     <div>
-        <v-navigation-drawer app v-model="drawer" width="16%" color="blue lighten-5" hide-overlay>
+        <v-navigation-drawer app v-model="drawer" width="16%" color="teal lighten-5" hide-overlay>
             <v-list-item>
                 <v-list-item-content>
-                    <v-img :src="require('@/assets/logo.png')" style="filter: drop-shadow(3px 2px 5px #00897B);" contain max-height="90"></v-img>
+                    <v-img :src="require('@/assets/logo.png')" style="filter: drop-shadow(3px 2px 5px #00897B);" contain max-height="90">
+                        <router-link :to="{name: 'DashboardMain'}" style="text-decoration: none; color: inherit;"></router-link>
+                    </v-img>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
@@ -45,9 +47,9 @@ export default {
         return {
             drawer: true,
             menus: [
-                { title: 'Kereta', icon: 'mdi-train', to: '/album' },
-                { title: 'Pesawat', icon: 'mdi-airplane', to: '/album' },
-                { title: 'Bus', icon: 'mdi-bus', to: '/album' },
+                { title: 'Kereta', icon: 'mdi-train', to: '/kereta' },
+                { title: 'Pesawat', icon: 'mdi-airplane', to: '/pesawat' },
+                { title: 'Bus', icon: 'mdi-bus', to: '/bus' },
             ]
         }
     }
