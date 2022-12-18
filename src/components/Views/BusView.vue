@@ -28,16 +28,63 @@
                                 <v-text-field required outlined v-model="form.tanggal" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
                             </v-col>
                             <v-col>
-                                <v-text-field required outlined color="teal" v-model="form.jumlah" label="Jumlah Penumpang" prepend-inner-icon="mdi-account-badge"></v-text-field>
+                                <v-text-field required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-text-field>
                             </v-col>
                         </v-row>
                     </v-form>
                     <v-card-actions>
-                        <v-btn large width="250" class="mx-auto" color="teal">
+                        <v-btn large width="60%" class="mx-auto" color="teal">
                             <span class="text-button">Search</span>
+                        </v-btn>
+                        <v-btn large width="30%" class="mx-auto ml-2" color="blue darken-3">
+                            <span class="text-button" @click="showAll">Lihat Semua</span>
                         </v-btn>
                     </v-card-actions>
                 </v-container>
+                <v-dialog v-model="dialogShow" width="450">
+                    <v-card elevation="3" style="border-radius: 5px;">
+                        <v-card-title>
+                            <span class="mx-auto my-1">List Bus</span>
+                        </v-card-title>
+                        <v-divider></v-divider>
+                        <v-card-content>
+                            <div v-for="(item, i) in test" :key="i">
+                                <v-card outlined class="mx-2 my-4 pa-1" color="teal lighten-5">
+                                    <v-card-title>
+                                        <span class="my-1" style="font-size: 80%;"><strong>{{item.name}}</strong></span>
+                                    </v-card-title>
+                                    <v-divider></v-divider>
+                                    <v-card-content>
+                                        <v-row class="mx-1 mt-2 mb-0">
+                                            <v-col>
+                                                <v-text-field rounded outlined readonly v-model="item.asal" max-width="50%" label="Asal"></v-text-field>
+                                            </v-col>
+                                            <v-col>
+                                                <v-text-field rounded outlined readonly v-model="item.tujuan" max-width="50%" label="Tujuan"></v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row class="mx-1 mt-0">
+                                            <v-col>
+                                                <v-text-field rounded outlined readonly v-model="item.kelas" max-width="100%" label="Kelas"></v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row class="mx-1 mb-0">
+                                            <v-col>
+                                                <v-text-field rounded outlined readonly v-model="item.jadwalBerangkat" max-width="50%" label="Jadwal Berangkat"></v-text-field>
+                                            </v-col>
+                                            <v-col>
+                                                <v-text-field rounded outlined readonly v-model="item.jadwalTiba" max-width="50%" label="Jadwal Tiba"></v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card-content>
+                                    <v-card-actions>
+                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;">Pesan Sekarang</v-btn>
+                                    </v-card-actions>
+                                </v-card>
+                            </div>
+                        </v-card-content>
+                    </v-card>
+                </v-dialog>
             </v-card>
         </v-container>
     </v-main>
@@ -46,13 +93,32 @@
 export default{
     data(){
         return{
+            dialogShow: false,
             temp: '',
             form: {
                 asal: '',
                 tujuan: '',
                 tanggal: '',
-                jumlah: '',
+                kelas: '',
             },
+            test: [
+                {
+                    name: 'Garuda 09TFXL3',
+                    asal: 'Surabaya',
+                    tujuan: 'Yogyakarta',
+                    kelas: 'Eksekutif',
+                    jadwalBerangkat: '03/06/2003; 19:00',
+                    jadwalTiba: '03/06/2003; 20:00'
+                },
+                {
+                    name: 'Citilink 09HJ5L3',
+                    asal: 'Balikpapan',
+                    tujuan: 'Yogyakarta',
+                    kelas: 'Ekonomi',
+                    jadwalBerangkat: '03/06/2003; 19:00',
+                    jadwalTiba: '03/06/2003; 20:00'
+                }
+            ]
         }
     },
     methods: {
@@ -60,6 +126,9 @@ export default{
             this.temp = this.form.asal
             this.form.asal = this.form.tujuan
             this.form.tujuan = this.temp
+        },
+        showAll(){
+            this.dialogShow = true
         }
     }
 }

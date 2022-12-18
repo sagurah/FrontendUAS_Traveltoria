@@ -56,7 +56,13 @@ const router = new VueRouter({
                     name: "BusView",
                     meta: {title: "TRAVELTORIA - Bus"},
                     component: importComponent("Views/BusView"),
-                }
+                },
+                {
+                    path: "/akun",
+                    name: "ProfileView",
+                    meta: {title: "TRAVELTORIA - Account"},
+                    component: importComponent("Views/ProfileView"),
+                },
             ]
         },
     ]
