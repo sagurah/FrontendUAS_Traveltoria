@@ -80,6 +80,7 @@
                     password: this.password,
                 })
                 .then((response)=> {
+                    localStorage.setItem("id", response.data.user.id);
                     this.error_message = response.data.message;
                     this.color = "green"
                     this.clear()
