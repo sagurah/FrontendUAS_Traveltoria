@@ -48,7 +48,7 @@
                                 </v-card-text>
                                 <v-card-actions>
                                     <v-btn @click="dialogLogout=false">Batal</v-btn>
-                                    <v-btn color="red" style="color:white;">Logout</v-btn>
+                                    <v-btn color="red" style="color:white;" @click="btnlogout">Logout</v-btn>
                                 </v-card-actions>
                             </v-card>
                         </v-dialog>
@@ -89,8 +89,9 @@ export default {
         }
     },
     methods: {
-        logout(){
-            
+        btnlogout(){
+            localStorage.removeItem('id');
+            this.$router.push('/login');
         }
     }
 }
