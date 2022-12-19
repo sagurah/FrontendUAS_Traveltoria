@@ -30,6 +30,12 @@ const router = new VueRouter({
             component: importComponent("RegisterPage"),
         },
         {
+            path: "/buses",
+            name: "BusPage",
+            meta: {title: 'Bus Page'},
+            component: importComponent("BusPage"),
+        },
+        {
             path: "/",
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
