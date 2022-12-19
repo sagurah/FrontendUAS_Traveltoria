@@ -10,7 +10,7 @@
                 <v-row no-gutters class="ma-10" justify="center">
                     <v-col cols="10" sm="6" md="6">
                         <v-card>
-                        <v-img height="734" src="https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_960_720.jpg"></v-img>
+                        <v-img height="615" src="https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_960_720.jpg"></v-img>
                         </v-card>
                     </v-col>
                     <v-col cols="10" sm="6" md="4">

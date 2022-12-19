@@ -6,7 +6,7 @@
             </v-toolbar-title>
             <v-spacer></v-spacer>
             <v-toolbar-items>
-                <v-btn flat>Contact Us</v-btn>
+                <v-btn flat><router-link :to="{name: 'ContactPage'}" style="text-decoration: none; color: inherit;" >Contact Us</router-link></v-btn>
                 <v-btn flat class="blue lighten-3"> <router-link :to="{name: 'LoginPage'}" style="text-decoration: none; color: inherit;" >Sign In</router-link></v-btn>
             </v-toolbar-items>
         </v-toolbar>
@@ -15,7 +15,9 @@
                 <v-parallax src="https://images.unsplash.com/photo-1669935874092-f2632a30c89c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" height="800">
                     <v-layout column align-center justify-center>
                         <h1 class="mb-2 white--text" style="font-size:50px; text-shadow: 3px 2px #000000;">Layanan travel terbaik se-nusantara</h1>
-                        <h1 class="mb-2 white--text" style="font-size:25px; text-shadow: 3px 2px #000000;">Travel - X</h1>
+                        <h1 class="mb-2 white--text" style="font-size:25px; text-shadow: 3px 2px #000000;">
+                            <span style="background-color:#42A5F5; color:white;" class="px-2">TRAVELTORIA</span>
+                        </h1>
                         <v-btn large class="mt-10 blue lighten-3" href="#produk">
                             <v-icon left black>mdi-login-variant</v-icon>
                             Mulai Menjelajahi
@@ -64,7 +66,7 @@
             </section>
         </v-content>
         <v-footer padless>
-            <v-col class="text-center blue lighten-5" cols="15">{{new Date().getFullYear()}} | Made with 💗 by <strong>Kelompok-X</strong></v-col>
+            <v-col class="text-center blue lighten-5" cols="15">{{new Date().getFullYear()}} | Made with 💗 by <strong>Kelompok-E</strong></v-col>
         </v-footer>
     </v-app>
 </template>
@@ -77,18 +79,18 @@ export default {
             cardContent: [
                 {
                     judul: 'Kereta',
-                    deskripsi: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et tortor tempus, euismod sem nec, porta turpis. Aliquam erat volutpat. Nullam velit eros, feugiat eget est sit amet, lacinia faucibus augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eros lorem, placerat eu tortor.',
+                    deskripsi: 'Kereta api adalah sarana transportasi berupa kendaraan dengan tenaga gerak, baik berjalan sendiri maupun dirangkaikan dengan kendaraan lainnya, yang akan ataupun sedang bergerak di rel.',
                     img: 'https://cdn.pixabay.com/photo/2015/06/03/23/48/train-797072_960_720.jpg'
                 },
                 {
                     judul: 'Pesawat',
                     img: 'https://cdn.pixabay.com/photo/2022/08/02/01/12/airplane-7359232_960_720.jpg',
-                    deskripsi: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et tortor tempus, euismod sem nec, porta turpis. Aliquam erat volutpat. Nullam velit eros, feugiat eget est sit amet, lacinia faucibus augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eros lorem, placerat eu tortor.'
+                    deskripsi: 'Pesawat sederhana yaitu alat bantu kerja manusia yang bentuknya sederhana. Contohnya:  tuas, katrol, dan bidang miring. Adapun pesawat canggih atau rumit adalah pesawat yang terdiri dari  komponen beberapa pesawat rumit. Contohnya: pesawat terbang, pesawat televisi, dan pesawat telepon.'
                 },
                 {
                     judul: 'Bus',
                     img: 'https://cdn.pixabay.com/photo/2022/11/16/07/58/traffic-7595395_960_720.jpg',
-                    deskripsi: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et tortor tempus, euismod sem nec, porta turpis. Aliquam erat volutpat. Nullam velit eros, feugiat eget est sit amet, lacinia faucibus augue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque eros lorem, placerat eu tortor.'
+                    deskripsi: 'Bus atau omnibus adalah kendaraan darat yang dirancang untuk mengangkut banyak penumpang. Bus dapat memiliki kapasitas hingga 300 penumpang.'
                 },
             ]
         }
