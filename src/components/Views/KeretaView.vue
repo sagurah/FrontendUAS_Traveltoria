@@ -12,7 +12,7 @@
                     <v-form ref="form">
                         <v-row>
                             <v-col>
-                                <v-text-field required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-airplane-takeoff"></v-text-field>
+                                <v-select :items="kotas" required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-airplane-takeoff"></v-select>
                             </v-col>
                             <v-col cols="2" class="mt-3 ml-1 mr-0">
                                 <v-chip color="teal" @click="swapVal">
@@ -20,7 +20,7 @@
                                 </v-chip>
                             </v-col>
                             <v-col>
-                                <v-text-field required outlined v-model="form.tujuan" color="teal" label="Tujuan" prepend-inner-icon="mdi-airplane-landing"></v-text-field>
+                                <v-select :items="kotas" required outlined v-model="form.tujuan" color="teal" label="Tujuan" prepend-inner-icon="mdi-airplane-landing"></v-select>
                             </v-col>
                         </v-row>
                         <v-row class="mt-0">
@@ -28,7 +28,7 @@
                                 <v-text-field required outlined v-model="form.tanggal" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
                             </v-col>
                             <v-col>
-                                <v-text-field required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-text-field>
+                                <v-select :items="kelas" required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-select>
                             </v-col>
                         </v-row>
                     </v-form>
@@ -101,6 +101,21 @@ export default{
                 tanggal: '',
                 kelas: '',
             },
+            kotas:
+            [
+                {text: "Yogyakarta", value:"1"},
+                {text: "Jakarta", value:"2"},
+                {text: "Bandung", value:"3"},
+                {text: "Surabaya", value:"4"},
+                {text: "Purwokerto", value:"5"},
+                {text: "Solo", value:"6"},
+            ],
+            kelas:
+            [
+                {text: "Ekonomi", value:"1"},
+                {text: "Bisnis", value:"2"},
+                {text: "Eksekutif", value:"3"}
+            ],
             test: [
                 {
                     name: 'Garuda 09TFXL3',
