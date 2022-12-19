@@ -18,14 +18,15 @@
                             <v-card-title class="font-weight-bold">Daftar akun baru</v-card-title>
                             <v-card-subtitle>Buat perjalanan anda terasa nyaman dan aktual bersama Traveltoria</v-card-subtitle>
                             <v-container>
+                                <v-select :items="type" required v-model="form.type" outlined color="teal" label="Tipe"></v-select>
                                 <label>Nama Anda</label>
-                                <v-text-field type="text" label="Name" placeholder="name" solo clearable required></v-text-field>
+                                <v-text-field type="text" label="Name" placeholder="name" v-model="form.name" solo clearable required></v-text-field>
                                 <label>Alamat Email</label>
-                                <v-text-field type="text" label="Email" placeholder="email" solo clearable required></v-text-field>
-                                <label>Gambar Profil</label>
-                                <v-text-field type="file" label="Picture" placeholder="picture"  accept="image/*" class="input-file" solo clearable required></v-text-field>
+                                <v-text-field type="text" label="Email" placeholder="email" v-model="form.email" solo clearable required></v-text-field>
+                                <!-- <label>Gambar Profil</label>
+                                <v-text-field type="file" label="Picture" placeholder="picture" v-model="form.type" accept="image/*" class="input-file" solo clearable required></v-text-field> -->
                                 <label>Kata Sandi</label>
-                                <v-text-field type="password" label="Password" placeholder="password" solo clearable required></v-text-field>
+                                <v-text-field type="password" label="Password" placeholder="password" v-model="form.password" solo clearable required></v-text-field>
                             </v-container>
                             <v-card-actions>
                                 <v-btn block color="primary" elevation="2" small x-small> Daftar</v-btn>
@@ -42,88 +43,45 @@
     </v-app>
 </template>
 <script>
-import { reactive, ref } from 'vue' 
-import axios from 'axios'
-  export default {
-    data () {
-      
-    },
-    setup() {
-        const user = reactive({ 
-            name: '', 
-            email: '', 
-            image: '',
-            password:''
-        })
-
-        const validation = ref([])
-        function store() { 
-            let name = user.name
-            let email = user.email
-            let image = user.image
-            let password = user.password
-            let type = 1
-            axios.post('http://localhost:8000/api/users', { 
-                name: name,
-                email: email,
-                image: image,
-                password: password,
-                type: type 
-            }).then(() => { 
-                this.$router.push('/login') 
-                this.window.location.reload()
-            }).catch(error => { 
-                //assign state validation with error 
-                validation.value = error.response.data 
-            }) 
-        }
-        return{
-            user,
-            validation,
-            store
-        }
-
-    },
-    methods: {
-        movepage(link) {
-            this.$router.push(link) 
-            window.location.reload()
-        },
-         uploadImage(e){
-            let files = e;
-            console.log(files);    
-            this.picture = files;    
-        },
-        registerSubmit() {
-            const formData = new FormData()
-            formData.append('name', this.name);
-            formData.append('email', this.email);
-            formData.append('password', this.password);
-            formData.append('image',this.picture);
-            formData.append('type',this.type);
-            if(this.$refs.form.validate()) {
-                this.$http
-                .post(this.$api + "/register", formData) .then((response)=> {
-                    this.error_message = response.data.message;
-                    this.color = "green"
-                    this.clear()
-                    this.snackbar = true;
-                    this.$router.push({
-                        name: "LoginPage",
-                    });
-                })
-                .catch((error)=>{
-                    this.error_message = error.response.data.message;
-                    this.snackbar = true;
-                    this.color = "red"
-                });
+    export default{
+        data(){
+            return{
+                type:[
+                    {text: "Customer", value:1},
+                    {text: "Maskapai Pesawat", value:2},
+                    {text: "Agen Kereta", value:3},
+                    {text: "Agen Bus", value:4}
+                ],
+                form: {
+                    name: '',
+                    type: '',
+                    password: '',    
+                    email: '',
+                },
             }
         },
-        clear() {
-            this.$refs.form.reset();
-        },
+        // methods:{
+        //     register(){
+        //         var url = this.$api + '/login';
+        //     this.$http.post(url, {
+        //         params:{
+        //             naeme : this.form.name,
+        //             type : this.form.type,
+        //             password : this.form.password,
+        //             email : this.form.email
+        //         }
+        //          headers: {
+        //          'Authorization' : 'Bearer ' + localStorage.getItem('token')
+        //          }
+        //      })
+        //     then(response => {
+        //          this.Buses = response.data.data;
+        //          this.load =true
+        //          this.dialogShow = true
+        //      })
+        //     }
+        // }
     }
-}
 </script>
 <style>
 *{
