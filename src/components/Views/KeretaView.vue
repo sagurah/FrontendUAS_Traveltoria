@@ -48,7 +48,7 @@
                         </v-card-title>
                         <v-divider></v-divider>
                         <v-card-content>
-                            <div v-for="(item, i) in test" :key="i">
+                            <div v-for="(item, i) in Keretas" :key="i">
                                 <v-card outlined class="mx-2 my-4 pa-1" color="teal lighten-5">
                                     <v-card-title>
                                         <span class="my-1" style="font-size: 80%;"><strong>{{item.name}}</strong></span>
@@ -57,26 +57,68 @@
                                     <v-card-content>
                                         <v-row class="mx-1 mt-2 mb-0">
                                             <v-col>
-                                                <v-text-field rounded outlined readonly v-model="item.asal" max-width="50%" label="Asal"></v-text-field>
+                                                <span v-if="item.from_id==1">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.from_id==2">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.from_id==3">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                </span>
+                                                <span v-if="item.from_id==4">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.from_id==5">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.from_id==6">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                </span>
                                             </v-col>
                                             <v-col>
-                                                <v-text-field rounded outlined readonly v-model="item.tujuan" max-width="50%" label="Tujuan"></v-text-field>
+                                                <span v-if="item.to_id==1">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.to_id==2">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.to_id==3">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                </span>
+                                                <span v-if="item.to_id==4">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.to_id==5">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.to_id==6">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                </span>
                                             </v-col>
                                         </v-row>
                                         <v-row class="mx-1 mt-0">
                                             <v-col>
-                                                <v-text-field rounded outlined readonly v-model="item.kelas" max-width="100%" label="Kelas"></v-text-field>
+                                                <span v-if="item.kelas==1">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Ekonomi"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.kelas==2">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bisnis"></v-text-field>
+                                                </span>
+                                                <span v-else-if="item.kelas==3">
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Sleeper"></v-text-field>
+                                                </span>
                                             </v-col>
                                         </v-row>
                                         <v-row class="mx-1 mb-0">
                                             <v-col>
-                                                <v-text-field rounded outlined readonly v-model="item.jadwalBerangkat" max-width="50%" label="Jadwal Berangkat"></v-text-field>
+                                                <v-text-field rounded outlined readonly v-model="item.jadwal_keberangkatan" max-width="50%" label="Jadwal Berangkat"></v-text-field>
                                             </v-col>
                                             <v-col>
-                                                <v-text-field rounded outlined readonly v-model="item.jadwalTiba" max-width="50%" label="Jadwal Tiba"></v-text-field>
+                                                <v-text-field rounded outlined readonly v-model="item.jadwal_tiba" max-width="50%" label="Jadwal Tiba"></v-text-field>
                                             </v-col>
                                         </v-row>
-                                    </v-card-content>
+                                    </v-card-content> 
                                     <v-card-actions>
                                         <v-btn small width="100%" class="mt-0" color="teal" style="color: white;">Pesan Sekarang</v-btn>
                                     </v-card-actions>
@@ -91,49 +133,36 @@
 </template>
 <script>
 export default{
+    
     data(){
         return{
             dialogShow: false,
             temp: '',
+            load: false,
             form: {
                 asal: '',
                 tujuan: '',
-                tanggal: '',
+                tanggal: '',    
                 kelas: '',
             },
+            tempKereta: [],
+            Keretas:[],
             kotas:
             [
-                {text: "Yogyakarta", value:"1"},
-                {text: "Jakarta", value:"2"},
-                {text: "Bandung", value:"3"},
-                {text: "Surabaya", value:"4"},
-                {text: "Purwokerto", value:"5"},
-                {text: "Solo", value:"6"},
+                {text: "Yogyakarta", value:1},
+                {text: "Jakarta", value:2},
+                {text: "Bandung", value:3},
+                {text: "Surabaya", value:4},
+                {text: "Purwokerto", value:5},
+                {text: "Solo", value:6},
             ],
             kelas:
             [
-                {text: "Ekonomi", value:"1"},
-                {text: "Bisnis", value:"2"},
-                {text: "Eksekutif", value:"3"}
+                {text: "Ekonomi", value:1},
+                {text: "Bisnis", value:2},
+                {text: "Eksekutif", value:3}
             ],
-            test: [
-                {
-                    name: 'Garuda 09TFXL3',
-                    asal: 'Surabaya',
-                    tujuan: 'Yogyakarta',
-                    kelas: 'Eksekutif',
-                    jadwalBerangkat: '03/06/2003; 19:00',
-                    jadwalTiba: '03/06/2003; 20:00'
-                },
-                {
-                    name: 'Citilink 09HJ5L3',
-                    asal: 'Balikpapan',
-                    tujuan: 'Yogyakarta',
-                    kelas: 'Ekonomi',
-                    jadwalBerangkat: '03/06/2003; 19:00',
-                    jadwalTiba: '03/06/2003; 20:00'
-                }
-            ]
+        
         }
     },
     methods: {
@@ -142,8 +171,26 @@ export default{
             this.form.asal = this.form.tujuan
             this.form.tujuan = this.temp
         },
+        readData(){
+            var url = this.$api + '/keretas';
+            this.$http.get(url, {
+                params:{
+                    from_id : this.form.asal,
+                    to_id : this.form.tujuan,
+                    jadwal_keberangkatan : this.form.tanggal,
+                    kelas : this.form.kelas
+                }
+                // headers: {
+                // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
+                // }
+            }).then(response => {
+                this.Keretas = response.data.data;
+                this.load =true
+                this.dialogShow = true
+            })
+        },
         showAll(){
-            this.dialogShow = true
+            this.readData();
         }
     }
 }
