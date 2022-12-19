@@ -10,7 +10,7 @@
                 <v-row no-gutters class="ma-10" justify="center">
                     <v-col cols="10" sm="6" md="6">
                         <v-card>
-                        <v-img height="734" src="https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_960_720.jpg"></v-img>
+                        <v-img height="615" src="https://cdn.pixabay.com/photo/2014/11/06/10/56/airport-519020_960_720.jpg"></v-img>
                         </v-card>
                     </v-col>
                     <v-col cols="10" sm="6" md="4">
@@ -31,7 +31,7 @@
                             <v-card-actions>
                                 <v-btn block color="primary" elevation="2" small x-small> Daftar</v-btn>
                             </v-card-actions>
-                            <v-card-subtitle>Sudah memiliki akun?<v-btn @click="movepage('/login')" plain color="#00008B" small x-small text>Masuk</v-btn> </v-card-subtitle>
+                            <v-card-subtitle>Sudah memiliki akun?<v-btn flat to="/login" plain color="#00008B" small x-small text>Masuk</v-btn> </v-card-subtitle>
                         </v-card>
                     </v-col>
                      <v-snackbar v-model="snackbar" :color="color" timeout="2000" bottom>

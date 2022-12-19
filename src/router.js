@@ -36,6 +36,12 @@ const router = new VueRouter({
             component: importComponent("BusPage"),
         },
         {
+            path: "/contact",
+            name: "ContactPage",
+            meta: {title: 'Contact Page'},
+            component: importComponent("ContactPage")
+        },
+        {
             path: "/",
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
