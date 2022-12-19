@@ -26,6 +26,11 @@ const router = new VueRouter({
             component: importComponent("RegisterPage"),
         },
         {
+            path: "/bus",
+            name: "BusPage",
+            component: importComponent("BusPage"),
+        },
+        {
             path: "/dashboard",
             name: "DashboardLayout",
             component: importComponent("DashboardLayout"),
@@ -37,6 +42,7 @@ const router = new VueRouter({
                 }
             ]
         },
+        
     ]
 })
 
