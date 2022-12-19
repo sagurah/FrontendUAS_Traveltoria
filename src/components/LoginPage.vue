@@ -17,8 +17,8 @@
                                 <v-card-title class="font-weight-bold">Selamat datang kembali</v-card-title>
                                 <v-card-subtitle>Selamat datang kembali! Mohon masukkan detail anda</v-card-subtitle>
                                 <v-container>
-                                    <v-text-field type="text" label="Email" placeholder="email" v-model="email" :rules="emailRules" solo clearable required></v-text-field>
-                                    <v-text-field type="password" label="Password" placeholder="password" v-model="password" :rules="passwordRules"  solo clearable required></v-text-field>
+                                    <v-text-field type="text" label="Email" placeholder="email" v-model="form.email" :rules="emailRules" solo clearable required></v-text-field>
+                                    <v-text-field type="password" label="Password" placeholder="password" v-model="form.password" :rules="passwordRules"  solo clearable required></v-text-field>
                                 </v-container>
                                 <v-card-actions>
                                     <v-btn block color="primary" elevation="2" small x-small @click="loginSubmit"> Masuk</v-btn>
@@ -49,6 +49,10 @@
   export default {
     data () {
         return {
+            form: {
+                email: '',
+                password: '',
+            },
             slides: [
             'https://cdn.pixabay.com/photo/2017/08/01/18/20/sea-2567088_960_720.jpg',
             'https://cdn.pixabay.com/photo/2019/10/01/21/42/caravansary-4519442_960_720.jpg',
@@ -58,10 +62,9 @@
             snackbar: false,
             valid: false,
             error_message: "",
-            email: "",
             emailRules: [(v) => !!v || "E-mail tidak boleh kosong dan format harus valid"],
-            password: "",
             passwordRules: [(v) => !!v || "Password tidak boleh kosong"],
+          
         };
     },
     setup() {
@@ -73,14 +76,16 @@
             this.window.location.reload()
         },
         loginSubmit() {
-            if(this.$refs.form.validate()) {
-                this.$http
-                .post(this.$api + "/login", {
-                    email: this.email,
-                    password: this.password,
-                })
-                .then((response)=> {
-                    localStorage.setItem("id", response.data.user.id);
+            if (this.$refs.form.validate()) {
+                var url = this.$api + '/logins';
+                this.$http.post(url, {
+                        email : this.form.email,
+                        password : this.form.password,
+                    // headers: {
+                    // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
+                    // }
+                }).then((response)=> {
+                    // localStorage.setItem("id", response.data.user.id);
                     this.error_message = response.data.message;
                     this.color = "green"
                     this.clear()
@@ -95,6 +100,7 @@
                     this.color = "red"
                 });
             }
+            
         },
         clear() {
             this.$refs.form.reset();
