@@ -25,7 +25,7 @@
                         </v-row>
                         <v-row class="mt-0">
                             <v-col>
-                                <v-text-field required outlined v-model="form.tanggal" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                <v-text-field required outlined readonly v-model="form.tanggal" @click="dialogDate = true" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
                             </v-col>
                             <v-col>
                                 <v-select :items="kelas" required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-select>
@@ -58,42 +58,42 @@
                                         <v-row class="mx-1 mt-2 mb-0">
                                             <v-col>
                                                 <span v-if="item.from_id==1">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Yogyakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==2">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Jakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Bandung"></v-text-field>
                                                 </span>
                                                 <span v-if="item.from_id==4">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Surabaya"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==5">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Purwokerto"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==6">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Solo"></v-text-field>
                                                 </span>
                                             </v-col>
                                             <v-col>
                                                 <span v-if="item.to_id==1">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Yogyakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==2">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Jakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Bandung"></v-text-field>
                                                 </span>
                                                 <span v-if="item.to_id==4">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Surabaya"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==5">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Purwokerto"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==6">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Solo"></v-text-field>
                                                 </span>
                                             </v-col>
                                         </v-row>
@@ -127,6 +127,17 @@
                         </v-card-content>
                     </v-card>
                 </v-dialog>
+                <v-dialog v-model="dialogDate" width="300">
+                    <v-date-picker show-current v-model="form.tanggal">
+                        <v-spacer></v-spacer>
+                        <v-btn @click="dialogDate = false" color="red darken-1">
+                            <span style="color: white;">Batal</span>
+                        </v-btn>
+                        <v-btn @click="dialogDate = false" color="green">
+                            <span style="color: white;">Simpan</span>
+                        </v-btn>
+                    </v-date-picker>
+                </v-dialog>
             </v-card>
         </v-container>
     </v-main>
@@ -136,6 +147,7 @@ export default{
     
     data(){
         return{
+            dialogDate: false,
             dialogShow: false,
             temp: '',
             load: false,
@@ -191,7 +203,7 @@ export default{
         },
         showAll(){
             this.readData();
-        }
+        },
     }
 }
 </script>
