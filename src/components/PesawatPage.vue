@@ -1,7 +1,8 @@
 <template> 
     <v-main>
+        <div class="bg">
         <div class="mx-5 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> 
-            <h1 class="h2">Pesawat Page</h1> 
+            <h1 class="h2">PESAWAT PAGE</h1> 
         </div> 
         <v-card elevation="3" class="mt-5 mx-6" style="border-radius: 6px;">
             <v-row justify="center" align="center" style="margin:3px auto;">
@@ -30,11 +31,18 @@
                 </template> -->
                 </v-data-table>
         </v-card>
+        </div>
     </v-main>
 </template> 
 <style lang="css">
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@800&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
+
+    .bg {
+    background-color: powderblue;
+    height: 100vh;
+}
+
 
     thead tr th span {
         font-size: 160% !important;
