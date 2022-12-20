@@ -81,6 +81,22 @@ const router = new VueRouter({
     ]
 })
 
+router.beforeEach((to, from, next) => {
+    if(to.name=="LoginPage" && localStorage.getItem("id") != null || to.name=="RegisterPage" && localStorage.getItem("id") != null ){
+        next('')
+        document.to.meta.title = "Dashboard"
+    }
+    if(localStorage.getItem("id")==null){
+        if(to.name=="DashboardMain" || to.name=="DashboardMain" || to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView"){
+            next('login')
+        document.to.meta.title = "Login Page"
+        }
+        
+    }
+    document.title = to.meta.title
+    next()
+});
+
 // router.beforeEach((to, from, next) => {
 //     if(to.name != "LoginPage" && localStorage.getItem("token") == null && to.name!="RegisterPage" && to.name!= "LandingPage"){
 //         next('landing')
@@ -91,4 +107,4 @@ const router = new VueRouter({
 //     next()
 // });
 
-export default router
+export default router;
