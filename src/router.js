@@ -36,6 +36,18 @@ const router = new VueRouter({
             component: importComponent("BusPage"),
         },
         {
+            path: "/keretas",
+            name: "Kereta Page",
+            meta: {title: 'Kereta Page'},
+            component: importComponent("KeretaPage"),
+        },
+        {
+            path: "/pesawats",
+            name: "Pesawat Page",
+            meta: {title: 'Pesawat Page'},
+            component: importComponent("PesawatPage"),
+        },
+        {
             path: "/contact",
             name: "ContactPage",
             meta: {title: 'Contact Page'},
@@ -74,6 +86,12 @@ const router = new VueRouter({
                     name: "ProfileView",
                     meta: {title: "TRAVELTORIA - Account"},
                     component: importComponent("Views/ProfileView"),
+                },
+                {
+                    path: "/keranjang",
+                    name: "KeranjangView",
+                    meta: {title: "TRAVELTORIA - Keranjang"},
+                    component: importComponent("Views/KeranjangView"),
                 },
             ]
         },

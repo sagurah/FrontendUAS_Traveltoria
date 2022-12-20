@@ -32,7 +32,7 @@
                             </v-col>
                         </v-row>
                         <v-col>
-                                <v-text-field :items="jumlahPenumpang" required outlined color="teal" v-model="form.jumlahPenumpang" label="Jumlah Penumpang"></v-text-field>
+                                <v-text-field :items="jumlahPenumpang" required outlined color="teal" prepend-inner-icon="mdi-account" v-model="form.jumlahPenumpang" label="Jumlah Penumpang"></v-text-field>
                         </v-col>
                     </v-form>
                     <v-card-actions>
@@ -123,7 +123,7 @@
                                         </v-row>
                                     </v-card-content> 
                                     <v-card-actions>
-                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;">Pesan Sekarang</v-btn>
+                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart(item.id)">Pesan Sekarang</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </div>
@@ -142,6 +142,12 @@
                     </v-date-picker>
                 </v-dialog>
             </v-card>
+            <v-container>
+                <!-- tutor grid ke kanan dong wkwkwk -->
+                <v-btn fab large color="teal" @click="movepage('/keranjang')">
+                    <v-icon color="white">mdi-cart</v-icon>
+                </v-btn>
+            </v-container>
         </v-container>
         <v-snackbar v-model="snackbar" :color="color" timeout="2000" bottom>
             {{ error_message }}
@@ -160,6 +166,8 @@ export default{
             error_message:"",
             snackbar: false,
             color: "",
+            kereta_id: "",
+            user_id: "",
             form: {
                 asal: '',
                 tujuan: '',
@@ -188,6 +196,9 @@ export default{
         }
     },
     methods: {
+        movepage(link) {
+            this.$router.push(link) 
+        },
         swapVal(){
             this.temp = this.form.asal
             this.form.asal = this.form.tujuan
@@ -211,6 +222,7 @@ export default{
                 this.load =true
                 this.dialogShow = true
                 this.error_message = response.data.message
+                this.user_id = localStorage.getItem('id')
                 this.snackbar = true
                 this.color="green"
             })
@@ -222,6 +234,7 @@ export default{
                 this.Keretas = response.data.data
                 this.dialogShow = true
                 this.error_message = response.data.message
+                this.user_id = localStorage.getItem('id')
                 this.color = "green";
             }).catch((error) => {
                 this.error_message = error.response.data.message;
@@ -229,6 +242,23 @@ export default{
                 this.color = "red"
             })
         },
+        /* eslint-disable */
+        addToCart(keretaid){
+            this.$http.post(this.$api + '/ticketKereta', {
+                user_id: this.user_id,
+                kereta_id: keretaid,
+            }).then(response => {
+                this.snackbar = true
+                this.error_message = '\nBerhasil menambahkan data ke keranjang'
+                this.color = "green"
+                this.dialogShow = false
+            }).catch((error) => {
+                this.error_message = error.response.data.message
+                this.snackbar = true
+                this.color = "red"
+            })
+        },
+        /* eslint-disable */
         showAll(){
             this.readData();
         },

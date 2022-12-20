@@ -2,7 +2,7 @@
     <v-main>
         <div class="bg">
         <div class="mx-5 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> 
-            <h1 class="h2">BUS PAGE</h1> 
+            <h1 class="h2">PESAWAT PAGE</h1> 
         </div> 
         <v-card elevation="3" class="mt-5 mx-6" style="border-radius: 6px;">
             <v-row justify="center" align="center" style="margin:3px auto;">
@@ -10,7 +10,7 @@
                     <v-text-field v-model="search" class="font-weight-bold" color="black" style="width: 70%;font-family: Poppins; font-size: 20px; font-style:bold; border-radius: 10px;" rounded append-icon="mdi-magnify" outlined placeholder="Search..." hide-details></v-text-field>
                 </v-col>
                 <v-col>
-                    <v-btn class="font-weight-bold" style="margin:10px auto;font-family: Poppins; font-size: 20px; text-transform: capitalize; float:right; color: black" x-large color="teal" @click="dialog = true">ADD BUS</v-btn>
+                    <v-btn class="font-weight-bold" style="margin:10px auto;font-family: Poppins; font-size: 20px; text-transform: capitalize; float:right; color: black" x-large color="teal" @click="dialog = true">ADD PESAWAT</v-btn>
                 </v-col>
             </v-row>
         </v-card>
@@ -38,10 +38,12 @@
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@800&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-.bg {
+    .bg {
     background-color: powderblue;
     height: 100vh;
 }
+
+
     thead tr th span {
         font-size: 160% !important;
         font-family: Poppins !important;
@@ -90,7 +92,7 @@
         },
         methods: {
             readData(){
-                var url = this.$api + '/buses';
+                var url = this.$api + '/pesawats';
                 this.$http.get(url, {
                     // headers: {
                     // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
