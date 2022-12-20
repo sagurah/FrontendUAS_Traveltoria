@@ -75,6 +75,12 @@ const router = new VueRouter({
                     meta: {title: "TRAVELTORIA - Account"},
                     component: importComponent("Views/ProfileView"),
                 },
+                {
+                    path: "/keranjang",
+                    name: "KeranjangView",
+                    meta: {title: "TRAVELTORIA - Keranjang"},
+                    component: importComponent("Views/KeranjangView"),
+                },
             ]
         },
         

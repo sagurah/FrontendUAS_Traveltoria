@@ -25,14 +25,14 @@
                         </v-row>
                         <v-row class="mt-0">
                             <v-col>
-                                <v-text-field required outlined v-model="form.tanggal" @click="dialogDate = true" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                <v-text-field required outlined readonly v-model="form.tanggal" @click="dialogDate = true" color="teal" label="Tanggal" prepend-inner-icon="mdi-calendar"></v-text-field>
                             </v-col>
                             <v-col>
                                 <v-select :items="kelas" required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-select>
                             </v-col>
                         </v-row>
                         <v-col>
-                                <v-text-field :items="jumlahPenumpang" required outlined color="teal" v-model="form.jumlahPenumpang" label="Jumlah Penumpang"></v-text-field>
+                                <v-text-field :items="jumlahPenumpang" required outlined color="teal" v-model="form.jumlahPenumpang" prepend-inner-icon="mdi-account" label="Jumlah Penumpang"></v-text-field>
                         </v-col>
                     </v-form>
                     <v-card-actions>
@@ -61,42 +61,42 @@
                                         <v-row class="mx-1 mt-2 mb-0">
                                             <v-col>
                                                 <span v-if="item.from_id==1">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Yogyakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==2">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Jakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Bandung"></v-text-field>
                                                 </span>
                                                 <span v-if="item.from_id==4">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Surabaya"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==5">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Purwokerto"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.from_id==6">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Asal" value="Solo"></v-text-field>
                                                 </span>
                                             </v-col>
                                             <v-col>
                                                 <span v-if="item.to_id==1">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Yogyakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Yogyakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==2">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Jakarta"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Jakarta"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bandung"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Bandung"></v-text-field>
                                                 </span>
                                                 <span v-if="item.to_id==4">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Surabaya"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Surabaya"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==5">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Purwokerto"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Purwokerto"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.to_id==6">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Solo"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Tujuan" value="Solo"></v-text-field>
                                                 </span>
                                             </v-col>
                                         </v-row>
@@ -123,7 +123,7 @@
                                         </v-row>
                                     </v-card-content> 
                                     <v-card-actions>
-                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;">Pesan Sekarang</v-btn>
+                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart">Pesan Sekarang</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </div>
@@ -142,6 +142,12 @@
                     </v-date-picker>
                 </v-dialog>
             </v-card>
+            <v-container>
+                <!-- tutor grid ke kanan dong wkwkwk -->
+                <v-btn fab large color="teal" @click="movepage('/keranjang')">
+                    <v-icon color="white">mdi-cart</v-icon>
+                </v-btn>
+            </v-container>
         </v-container>
         <v-snackbar v-model="snackbar" :color="color" timeout="2000" bottom>
             {{ error_message }}
@@ -188,6 +194,9 @@ export default{
         }
     },
     methods: {
+        movepage(link) {
+            this.$router.push(link) 
+        },
         swapVal(){
             this.temp = this.form.asal
             this.form.asal = this.form.tujuan
@@ -227,6 +236,22 @@ export default{
                 this.color = "red"
             })
         },
+        /* eslint-disable */
+        addToCart(){
+            this.$http.post(this.$api + '/users/'+ localStorage.getItem('id'), {
+                // keranjang: form data yg dipilih
+            }).then(response => {
+                this.snackbar = true
+                this.error_message = '\nBerhasil menambahkan data ke keranjang'
+                this.color = "green"
+                this.dialogShow = false
+            }).catch((error) => {
+                this.error_message = error.response.data.message
+                this.snackbar = true
+                this.color = "red"
+            })
+        },
+        /* eslint-disable */
         showAll(){
             this.readData();
         },
