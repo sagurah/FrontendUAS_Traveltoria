@@ -37,7 +37,7 @@
                     </v-form>
                     <v-card-actions>
                         <v-btn large width="60%" class="mx-auto" color="teal">
-                            <span class="text-button">Search</span>
+                            <span class="text-button" @click="readDataSearch">Search</span>
                         </v-btn>
                         <v-btn large width="30%" class="mx-auto ml-2" color="blue darken-3">
                             <span class="text-button" @click="showAll">Lihat Semua</span>
@@ -143,6 +143,9 @@
                 </v-dialog>
             </v-card>
         </v-container>
+        <v-snackbar v-model="snackbar" :color="color" timeout="2000" bottom>
+            {{ error_message }}
+        </v-snackbar>
     </v-main>
 </template>
 <script>
@@ -154,6 +157,9 @@ export default{
             dialogShow: false,
             temp: '',
             load: false,
+            error_message:"",
+            snackbar: false,
+            color: "",
             form: {
                 asal: '',
                 tujuan: '',
@@ -204,11 +210,34 @@ export default{
                 this.Keretas = response.data.data;
                 this.load =true
                 this.dialogShow = true
+                this.error_message = response.data.message
+                this.snackbar = true
+                this.color="green"
+            })
+        },
+        readDataSearch() {
+            var url = this.$api + '/keretas';
+            var params = '?from_id=' + this.form.asal + '&to_id=' + this.form.tujuan + '&jadwal_keberangkatan='+ this.form.tanggal+'&kelas='+ this.form.kelas
+            this.$http.get(url + params).then(response => {
+                this.Keretas = response.data.data
+                this.dialogShow = true
+                this.error_message = response.data.message
+                this.color = "green";
+            }).catch((error) => {
+                this.error_message = error.response.data.message;
+                this.snackbar = true;
+                this.color = "red"
             })
         },
         showAll(){
             this.readData();
         },
+        clear() {
+            this.$refs.form.reset();
+        }
+    },
+    mounted() {
+        this.clear()
     }
 }
 </script>
