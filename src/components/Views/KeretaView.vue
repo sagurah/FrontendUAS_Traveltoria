@@ -31,6 +31,9 @@
                                 <v-select :items="kelas" required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-select>
                             </v-col>
                         </v-row>
+                        <v-col>
+                                <v-text-field :items="jumlahPenumpang" required outlined color="teal" v-model="form.jumlahPenumpang" label="Jumlah Penumpang"></v-text-field>
+                        </v-col>
                     </v-form>
                     <v-card-actions>
                         <v-btn large width="60%" class="mx-auto" color="teal">
