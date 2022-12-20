@@ -12,7 +12,7 @@
                     <v-form ref="form">
                         <v-row>
                             <v-col>
-                                <v-select :items="kotas" required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-airplane-takeoff"></v-select>
+                                <v-select :items="kotas" required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-train"></v-select>
                             </v-col>
                             <v-col cols="2" class="mt-3 ml-1 mr-0">
                                 <v-chip color="teal" @click="swapVal">
@@ -20,7 +20,7 @@
                                 </v-chip>
                             </v-col>
                             <v-col>
-                                <v-select :items="kotas" required outlined v-model="form.tujuan" color="teal" label="Tujuan" prepend-inner-icon="mdi-airplane-landing"></v-select>
+                                <v-select :items="kotas" required outlined v-model="form.tujuan" color="teal" label="Tujuan" prepend-inner-icon="mdi-train"></v-select>
                             </v-col>
                         </v-row>
                         <v-row class="mt-0">
