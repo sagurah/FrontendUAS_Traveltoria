@@ -51,8 +51,6 @@
     <script>
         export default {
             data: () => ({
-                id: 5,
-                // id: localStorage.getItem('id'),
                 loading: false,
                 selection: 1,
             }),

@@ -86,9 +86,12 @@ router.beforeEach((to, from, next) => {
         next('')
         document.to.meta.title = "Dashboard"
     }
-    if(to.name=="DashboardMain" && localStorage.getItem("id")==null){
-        next('login')
+    if(localStorage.getItem("id")==null){
+        if(to.name=="DashboardMain" || to.name=="DashboardMain" || to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView"){
+            next('login')
         document.to.meta.title = "Login Page"
+        }
+        
     }
     document.title = to.meta.title
     next()
