@@ -159,6 +159,7 @@ export default{
                 tujuan: '',
                 tanggal: '',    
                 kelas: '',
+                jumlahPenumpang: '',
             },
             tempBus: [],
             Buses:[],
@@ -185,6 +186,7 @@ export default{
             this.temp = this.form.asal
             this.form.asal = this.form.tujuan
             this.form.tujuan = this.temp
+           
         },
         readData(){
             var url = this.$api + '/buses';
@@ -193,7 +195,8 @@ export default{
                     from_id : this.form.asal,
                     to_id : this.form.tujuan,
                     jadwal_keberangkatan : this.form.tanggal,
-                    kelas : this.form.kelas
+                    kelas : this.form.kelas,
+                    jumlahPenumpang : this.jumlahPenumpang
                 }
             }).then(response => {
                 this.Buses = response.data.data;

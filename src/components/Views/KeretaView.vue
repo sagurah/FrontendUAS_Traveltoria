@@ -159,6 +159,7 @@ export default{
                 tujuan: '',
                 tanggal: '',    
                 kelas: '',
+                jumlahPenumpang: '',
             },
             tempKereta: [],
             Keretas:[],
@@ -193,7 +194,8 @@ export default{
                     from_id : this.form.asal,
                     to_id : this.form.tujuan,
                     jadwal_keberangkatan : this.form.tanggal,
-                    kelas : this.form.kelas
+                    kelas : this.form.kelas,
+                    jumlahPenumpang : this.jumlahPenumpang
                 }
                 // headers: {
                 // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
