@@ -85,7 +85,7 @@
                     // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
                     // }
                 }).then((response)=> {
-                    // localStorage.setItem("id", response.data.user.id);
+                    localStorage.setItem("id", response.data.data.id);
                     this.error_message = response.data.message;
                     this.color = "green"
                     this.clear()

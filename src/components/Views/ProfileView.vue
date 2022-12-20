@@ -9,27 +9,21 @@
                 </v-card-title>
                 <v-divider class="mx-2" color=""></v-divider>
                 <v-card-content>
-                    <v-card class="rounded-circle my-6 mx-auto" elevation="6" max-width="120">
-                        <!-- nanti diganti pake img dari user -->
-                        <v-img class="mx-auto" :src="'http://127.0.0.1:8000/storage/'+user_data.image"></v-img> 
-                    </v-card>
                     <div class="">
-                        <label>Nama Anda</label>
-                        <v-text-field type="text" label="Name" placeholder="name" v-model="name" solo clearable required></v-text-field>
-                        <label>Alamat Email</label>
-                        <v-text-field type="text"   label="Email" placeholder="email" v-model="email" solo clearable required></v-text-field>
-                        <label>Gambar Profil</label>
-                        <v-file-input type="file"  @change="uploadImage" ref="file" id="picture" name="picture" label="Picture" placeholder="picture" accept="image/jpeg,image/jpg,image/png" solo clearable required></v-file-input>
-                        <label>Kata Sandi</label>
-                        <v-text-field type="password" :rules="passwordRules"  label="Password" placeholder="password" v-model="password" solo clearable required></v-text-field>
-                        <label>Tipe</label>
-                        <v-text-field type="text"  :rules="typeRules" label="Type" placeholder="type" v-model="type" solo clearable required></v-text-field>
-                        <v-btn class="mb-4" color="yellow">
-                            <span style="color:black;">Batal</span>
-                        </v-btn>
-                        <v-btn class="mb-4 mx-2" color="green">
-                            <span style="color:white;">Simpan Perubahan</span>
-                        </v-btn>    
+                        <v-form v-model="valid" ref="form">
+                            <label>Nama Anda</label>
+                            <v-text-field type="text" label="Name" placeholder="name" v-model="form.name" :rules="nameRules" solo clearable required></v-text-field>
+                            <label>Alamat Email</label>
+                            <v-text-field type="text" label="Email" placeholder="email" v-model="form.email" :rules="emailRules" solo clearable required></v-text-field>
+                            <label>Kata Sandi</label>
+                            <v-text-field type="password" label="Password" placeholder="password" v-model="form.password" :rules="passwordRules" solo clearable required></v-text-field>
+                            <v-btn class="mb-4" color="yellow" flat to="/">
+                                <span style="color:black;">Batal</span>
+                            </v-btn>
+                            <v-btn class="mb-4 mx-2" color="green" @click="updateDataUser">
+                                <span style="color:white;">Simpan Perubahan</span>
+                            </v-btn> 
+                        </v-form>   
                     </div>
                 </v-card-content>
             </v-card>
@@ -45,36 +39,53 @@ export default{
         return{
             tempImg: 'https://cdn.pixabay.com/photo/2017/11/15/20/49/head-2952533_960_720.png',
             user_data: [],
-            name: "",
-            password: "",
-            email: "",
-            type: "",
-            name_type:"", 
-            image: null,
-            picture: "",
-
+            form: {
+                email: '',
+                password: '',
+                tipe: null,
+                name: '',
+            },
             snackbar: false,
             error_message: "",
-
         };
     },
     methods: {
-         uploadImage(e){
-            let files = e;
-            console.log(files);    
-            this.picture = files;    
-        },
         readDataUSer() {
-            this.$http.get(this.$api + '/user/'+ localStorage.getItem('id'))
+            this.$http.get(this.$api + '/users/'+ localStorage.getItem('id'))
             .then(response => {
                 this.user_data = response.data.data;
-                this.name = response.data.data.name;
-                this.email = response.data.data.email;
-                this.password = response.data.data.password;
-                this.type = response.data.data.type;
+                this.form.name = response.data.data.name;
+                this.form.email = response.data.data.email;
             }).catch(error => {
+                this.error_message = error.response.data.message;
                 console.log(error)
             })
+        },
+        updateDataUser() {
+            if(this.$refs.form.validate()) {
+                this.$http.post(this.$api + '/users/'+ localStorage.getItem('id'), {
+                    name: this.form.name,
+                    email: this.form.email,
+                    password: this.form.password
+                })
+                .then(response => {
+                    this.error_message = response.data.message;
+                    this.color = "green"
+                    this.clear()
+                    this.snackbar = true;
+                    this.$router.push({
+                        name: "DashboardMain",
+                    });
+                })
+                .catch((error)=>{
+                    this.error_message = error.response.data.message;
+                    this.snackbar = true;
+                    this.color = "red"
+                });
+            }
+        },
+         clear() {
+            this.$refs.form.reset();
         },
     },
     mounted() {

@@ -19,9 +19,9 @@
                             <v-card-subtitle>Buat perjalanan anda terasa nyaman dan aktual bersama Traveltoria</v-card-subtitle>
                             <v-form v-model="valid" ref="form">
                                 <v-container>
-                                    <v-select :items="type" required v-model="form.tipe" outlined color="teal" label="Tipe"></v-select>
+                                    <v-select :items="type" required v-model="form.tipe" :rules="tipeRules" outlined color="teal" label="Tipe"></v-select>
                                     <label>Nama Anda</label>
-                                    <v-text-field type="text" label="Name" placeholder="name" v-model="form.name" solo clearable required></v-text-field>
+                                    <v-text-field type="text" label="Name" placeholder="name" v-model="form.name"  :rules="nameRules" solo clearable required></v-text-field>
                                     <label>Alamat Email</label>
                                     <v-text-field type="text" label="Email" placeholder="email" v-model="form.email" :rules="emailRules" solo clearable required></v-text-field>
                                     <!-- <label>Gambar Profil</label>
@@ -64,6 +64,8 @@
             snackbar: false,
             valid: false,
             error_message: "",
+            nameRules: [(v) => !!v || "Nama tidak boleh kosong"],
+            tipeRules: [(v) => !!v || "Tipe tidak boleh kosong"],
             emailRules: [(v) => !!v || "E-mail tidak boleh kosong dan format harus valid"],
             passwordRules: [(v) => !!v || "Password tidak boleh kosong"],
           
