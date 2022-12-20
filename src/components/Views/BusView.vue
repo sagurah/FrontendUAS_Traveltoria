@@ -166,6 +166,8 @@ export default{
             error_message:"",
             snackbar: false,
             color: "",
+            bus_id: null,
+            user_id: null,
             form: {
                 asal: '',
                 tujuan: '',
@@ -217,9 +219,16 @@ export default{
                 this.Buses = response.data.data;
                 this.error_message = response.data.message
                 this.load =true
+                this.user_id = localStorage.getItem('id')
+                //dapetin id bus nya masih bingung buat addtochart (retutama retrieve all data jadi gabisa pesan lewat btn lihat semua)
+                // this.bus_id = response.data.data[0].id
                 this.dialogShow = true
                 this.snackbar = true
                 this.color="green"
+            }).catch((error)=>{
+                this.error_message = error.response.data.message;
+                this.snackbar = true;
+                this.color = "red"
             })
         },
         readDataSearch() {
@@ -229,6 +238,9 @@ export default{
                 this.Buses = response.data.data
                 this.dialogShow = true
                 this.error_message = response.data.message
+                this.user_id = localStorage.getItem('id')
+                //dapetin id bus nya masih bingung buat addtochart (harusnya ngereturn satu object makanya tembak 0 langsung)
+                this.bus_id = response.data.data[0].id
                 this.color = "green";
             }).catch((error) => {
                 this.error_message = error.response.data.message;
@@ -238,11 +250,14 @@ export default{
         },
         /* eslint-disable */
         addToCart(){
-            this.$http.post(this.$api + '/users/'+ localStorage.getItem('id'), {
-                // keranjang: form data yg dipilih
+            console.log(this.bus_id)
+            this.$http.post(this.$api + '/ticketBus', {
+                user_id: this.user_id,
+                bus_id: this.bus_id,
             }).then(response => {
                 this.snackbar = true
                 this.error_message = '\nBerhasil menambahkan data ke keranjang'
+                this.error_message = response.data.message
                 this.color = "green"
                 this.dialogShow = false
             }).catch((error) => {

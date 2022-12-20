@@ -166,6 +166,8 @@ export default{
             error_message:"",
             snackbar: false,
             color: "",
+            pesawat_id: "",
+            user_id: "",
             form: {
                 asal: '',
                 tujuan: '',
@@ -220,6 +222,8 @@ export default{
                 this.load =true
                 this.dialogShow = true
                 this.error_message = response.data.message
+                //dapetin id kereta nya masih bingung buat addtochart (retutama retrieve all data jadi ga bisa pesan lewat btn lihat semua)
+                // this.kereta_id = response.data.data[0].id
                 this.snackbar = true
                 this.color="green"
             })
@@ -232,6 +236,9 @@ export default{
                 this.Pesawats = response.data.data
                 this.dialogShow = true
                 this.error_message = response.data.message
+                this.user_id = localStorage.getItem('id')
+                //dapetin id pesawat nya masih bingung buat addtochart (harusnya ngereturn satu object makanya tembak 0 langsung)
+                this.pesawat_id = response.data.data[0].id 
                 this.color = "green";
             }).catch((error) => {
                 this.error_message = error.response.data.message;
@@ -241,8 +248,9 @@ export default{
         },
         /* eslint-disable */
         addToCart(){
-            this.$http.post(this.$api + '/users/'+ localStorage.getItem('id'), {
-                // keranjang: form data yg dipilih
+            this.$http.post(this.$api + '/ticketPesawat', {
+                user_id: this.user_id,
+                pesawat_id: this.pesawat_id,
             }).then(response => {
                 this.snackbar = true
                 this.error_message = '\nBerhasil menambahkan data ke keranjang'
