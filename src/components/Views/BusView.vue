@@ -123,7 +123,7 @@
                                         </v-row>
                                     </v-card-content> 
                                     <v-card-actions>
-                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart">Pesan Sekarang</v-btn>
+                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart(item.id)">Pesan Sekarang</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </div>
@@ -220,8 +220,6 @@ export default{
                 this.error_message = response.data.message
                 this.load =true
                 this.user_id = localStorage.getItem('id')
-                //dapetin id bus nya masih bingung buat addtochart (retutama retrieve all data jadi gabisa pesan lewat btn lihat semua)
-                // this.bus_id = response.data.data[0].id
                 this.dialogShow = true
                 this.snackbar = true
                 this.color="green"
@@ -239,8 +237,6 @@ export default{
                 this.dialogShow = true
                 this.error_message = response.data.message
                 this.user_id = localStorage.getItem('id')
-                //dapetin id bus nya masih bingung buat addtochart (harusnya ngereturn satu object makanya tembak 0 langsung)
-                this.bus_id = response.data.data[0].id
                 this.color = "green";
             }).catch((error) => {
                 this.error_message = error.response.data.message;
@@ -249,11 +245,11 @@ export default{
             })
         },
         /* eslint-disable */
-        addToCart(){
+        addToCart(busid){
             console.log(this.bus_id)
             this.$http.post(this.$api + '/ticketBus', {
                 user_id: this.user_id,
-                bus_id: this.bus_id,
+                bus_id: busid,
             }).then(response => {
                 this.snackbar = true
                 this.error_message = '\nBerhasil menambahkan data ke keranjang'

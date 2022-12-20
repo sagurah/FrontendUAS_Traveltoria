@@ -123,7 +123,7 @@
                                         </v-row>
                                     </v-card-content> 
                                     <v-card-actions>
-                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart">Pesan Sekarang</v-btn>
+                                        <v-btn small width="100%" class="mt-0" color="teal" style="color: white;" @click="addToCart(item.id)">Pesan Sekarang</v-btn>
                                     </v-card-actions>
                                 </v-card>
                             </div>
@@ -222,8 +222,7 @@ export default{
                 this.load =true
                 this.dialogShow = true
                 this.error_message = response.data.message
-                //dapetin id kereta nya masih bingung buat addtochart (retutama retrieve all data jadi ga bisa pesan lewat btn lihat semua)
-                // this.kereta_id = response.data.data[0].id
+                this.user_id = localStorage.getItem('id')
                 this.snackbar = true
                 this.color="green"
             })
@@ -237,8 +236,6 @@ export default{
                 this.dialogShow = true
                 this.error_message = response.data.message
                 this.user_id = localStorage.getItem('id')
-                //dapetin id pesawat nya masih bingung buat addtochart (harusnya ngereturn satu object makanya tembak 0 langsung)
-                this.pesawat_id = response.data.data[0].id 
                 this.color = "green";
             }).catch((error) => {
                 this.error_message = error.response.data.message;
@@ -247,10 +244,10 @@ export default{
             })
         },
         /* eslint-disable */
-        addToCart(){
+        addToCart(pesawatid){
             this.$http.post(this.$api + '/ticketPesawat', {
                 user_id: this.user_id,
-                pesawat_id: this.pesawat_id,
+                pesawat_id: pesawatid,
             }).then(response => {
                 this.snackbar = true
                 this.error_message = '\nBerhasil menambahkan data ke keranjang'
