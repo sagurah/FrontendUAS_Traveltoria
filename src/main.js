@@ -6,7 +6,7 @@ import axios from 'axios';
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios;
-Vue.prototype.$api = 'http://localhost:8000/api';
+Vue.prototype.$api = 'https://api.traveltoria.my.id/api';
 
 
 new Vue({
