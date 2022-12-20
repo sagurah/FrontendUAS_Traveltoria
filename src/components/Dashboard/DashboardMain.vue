@@ -13,7 +13,6 @@
                                 ></v-img>
 
                                 <v-card-title><strong> TRAVELTORIA </strong></v-card-title>
-
                                 <v-card-text>
                                     <v-row align="center" class="mx-0">
                                         <v-progress-linear
@@ -52,6 +51,8 @@
     <script>
         export default {
             data: () => ({
+                id: 5,
+                // id: localStorage.getItem('id'),
                 loading: false,
                 selection: 1,
             }),

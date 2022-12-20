@@ -192,9 +192,6 @@ export default{
                     jadwal_keberangkatan : this.form.tanggal,
                     kelas : this.form.kelas
                 }
-                // headers: {
-                // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
-                // }
             }).then(response => {
                 this.Buses = response.data.data;
                 this.load =true
