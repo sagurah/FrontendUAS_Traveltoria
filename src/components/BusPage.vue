@@ -84,7 +84,7 @@
                                 </v-card-content>
                                 <v-card-actions class="justify-end">
                                     <v-btn color="#EEEEEE" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 900; color:#001D38;" @click="closeDialog()"> Cancel </v-btn>
-                                    <v-btn color="#93A9D1" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 700; color:#F7CACA;" @click="saveData()"> Save </v-btn> 
+                                    <v-btn color="teal" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 700; color:#F7CACA;" @click="saveData()"> Save </v-btn> 
                                 </v-card-actions>
                         </v-container>
                     </v-card>

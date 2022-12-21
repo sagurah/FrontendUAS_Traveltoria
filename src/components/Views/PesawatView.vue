@@ -109,7 +109,7 @@
                                                     <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bisnis"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.kelas==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Sleeper"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="First class"></v-text-field>
                                                 </span>
                                             </v-col>
                                         </v-row>
@@ -190,7 +190,7 @@ export default{
             [
                 {text: "Ekonomi", value:1},
                 {text: "Bisnis", value:2},
-                {text: "Eksekutif", value:3}
+                {text: "First class", value:3}
             ],
         
         }

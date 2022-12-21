@@ -109,7 +109,7 @@
                                                     <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Bisnis"></v-text-field>
                                                 </span>
                                                 <span v-else-if="item.kelas==3">
-                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Sleeper"></v-text-field>
+                                                    <v-text-field rounded outlined readonly max-width="100%" label="Kelas" value="Eksekutif"></v-text-field>
                                                 </span>
                                             </v-col>
                                         </v-row>
