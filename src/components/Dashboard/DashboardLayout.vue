@@ -99,6 +99,9 @@ export default {
         }
     },
     mounted(){
+        if(localStorage.getItem("verified")==0){
+            this.$router.push('/verif');
+        }
         if(localStorage.getItem("type")==1){
             this.menus = this.users;
         }

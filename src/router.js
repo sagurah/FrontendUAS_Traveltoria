@@ -67,6 +67,7 @@ const router = new VueRouter({
         },
         {
             path: "/dashboard",
+            name: "temp",
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
                 {
@@ -114,15 +115,20 @@ const router = new VueRouter({
 //||to.name==""
 router.beforeEach((to, from, next) => {
     if(localStorage.getItem("id")==null){
-        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView" || to.name=="Verified"){
+        if(to.name=="temp" || to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView" || to.name=="Verified"){
             next('login')
             document.to.meta.title = "Login Page"
         }
     }else{  
-        if(to.name=="RegisterPage" || to.name=="LoginPage" || to.name=="LandingPage" || to.name=="Verification" || to.name=="Verified" ){
+        if(localStorage.getItem("verif")==0){
+            next('verif')
+            document.to.meta.title = "Verification Page"
+        }
+        if(to.name=="RegisterPage" || to.name=="LoginPage" || to.name=="LandingPage"){
             next('dashboard')
             document.to.meta.title = "DashboardMain"
         }
+        
             if(localStorage.getItem("type")!=1){
                 if(to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="KeranjangView"){
                     next('dashboard')
