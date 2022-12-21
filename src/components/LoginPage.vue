@@ -12,7 +12,7 @@
             <section>
                 <v-row no-gutters class="ma-15" justify="center" align="center">
                     <v-col cols="10" sm="6" md="4">
-                        <v-card class="pa-5">
+                        <v-card class="pa-3">
                             <v-form v-model="valid" ref="form">
                                 <v-card-title class="font-weight-bold">Selamat datang kembali</v-card-title>
                                 <v-card-subtitle>Selamat datang kembali! Mohon masukkan detail anda</v-card-subtitle>
