@@ -2,7 +2,7 @@
     <v-main>
         <div class="bg">
         <div class="mx-5 d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"> 
-            <h1 class="h2">PESAWAT PAGE</h1> 
+            <h1 class="h2">Pesawat PAGE</h1> 
         </div> 
         <v-card elevation="3" class="mt-5 mx-6" style="border-radius: 6px;">
             <v-row justify="center" align="center" style="margin:3px auto;">
@@ -15,35 +15,116 @@
             </v-row>
         </v-card>
         <v-card elevation="3" style="border-radius: 6px;" class="mt-5 mx-6">
-            <v-data-table :headers="headers" :items="Buses" :search="search">
+            <v-data-table :headers="headers" :items="Pesawats" :search="search">
+                <template v-slot:[`item.kelas`]="{item}">
+                    <span v-if="item.kelas==1">Ekonomi</span>
+                    <span v-if="item.kelas==2">Bisnis</span>
+                    <span v-if="item.kelas==3">First Class</span>
+                </template>
+                <template v-slot:[`item.from_id`]="{item}">
+                    <span v-if="item.from_id==1">Yogyakarta</span>
+                    <span v-else-if="item.from_id==2">Jakarta</span>
+                    <span v-else-if="item.from_id==3">Bandung</span>
+                    <span v-if="item.from_id==4">Surabaya</span>
+                    <span v-else-if="item.from_id==5">Purwokerto</span>
+                    <span v-else-if="item.from_id==6">Solo</span>
+                </template>
+                <template v-slot:[`item.to_id`]="{item}">
+                    <span v-if="item.to_id==1">Yogyakarta</span>
+                    <span v-else-if="item.to_id==2">Jakarta</span>
+                    <span v-else-if="item.to_id==3">Bandung</span>
+                    <span v-if="item.to_id==4">Surabaya</span>
+                    <span v-else-if="item.to_id==5">Purwokerto</span>
+                    <span v-else-if="item.to_id==6">Solo</span>
+                </template>
                 <template v-slot:[`item.actions`]="{item}">
                     <v-btn icon small class="mr-2" @click="editHandler(item)">
                         <v-icon color="red">mdi-pencil</v-icon>
                     </v-btn>
-                    <v-btn icon small @click="deleteHandler(item.id)">
+                    <v-btn icon small @click="deleteBus(item.id)">
                         <v-icon color="green">mdi-delete</v-icon>
                     </v-btn>
                 </template>
-
-                <!-- <template v-slot:[`item.actions`]="{ item }">
-                <v-btn small class="mr-2" @click="editHandler(item)"> edit </v-btn>
-                <v-btn small @click="deleteHandler(item.id)"> delete </v-btn>
-                </template> -->
-                </v-data-table>
+            </v-data-table>
         </v-card>
+        <v-dialog v-model="dialog" width="450">
+                    <v-card elevation="3" style="border-radius: 5px;">
+                        <v-card-title>
+                            <span class="mx-auto my-1">Tambah Pesawat</span>
+                        </v-card-title>
+                        <v-divider></v-divider>
+                        <v-container class="mt-3">
+                                <v-card-content>
+                                    <v-text-field required v-model="form.name" outlined color="teal" label="Nama Bus"></v-text-field>
+                                    <v-row>
+                                        <v-col>
+                                            <v-select :items="kotas" required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-bus"></v-select>
+                                        </v-col>
+                                        <v-col>
+                                            <v-select :items="kotas" required v-model="form.tujuan" outlined color="teal" label="Tujuan" prepend-inner-icon="mdi-bus"></v-select>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row class="mt-0">
+                                        <v-col>
+                                            <v-text-field required outlined readonly v-model="form.tanggalKeberangkatan" @click="dialogDateKeberangkatan = true" color="teal" label="Tanggal Berangkat" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                        </v-col>
+                                        <v-col>
+                                            <v-text-field required outlined  v-model="form.jamKeberangkatan" color="teal" label="Jam Berangkat" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-row class="mt-0">
+                                        <v-col>
+                                            <v-text-field required outlined readonly v-model="form.tanggalTiba" @click="dialogDateTiba = true" color="teal" label="Tanggal Sampai" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                        </v-col>
+                                        <v-col>
+                                            <v-text-field required outlined  v-model="form.jamTiba"  color="teal" label="Jam Sampai" prepend-inner-icon="mdi-calendar"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                    <v-select :items="kelas" required outlined color="teal" v-model="form.kelas" label="Kelas" prepend-inner-icon="mdi-account-badge"></v-select>
+                                </v-card-content>
+                                <v-card-actions class="justify-end">
+                                    <v-btn color="#EEEEEE" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 900; color:#001D38;" @click="closeDialog()"> Cancel </v-btn>
+                                    <v-btn color="#93A9D1" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 700; color:#F7CACA;" @click="saveData()"> Save </v-btn> 
+                                </v-card-actions>
+                        </v-container>
+                    </v-card>
+                </v-dialog>
+                <v-dialog v-model="dialogDateKeberangkatan" width="300">
+                    <v-date-picker show-current v-model="form.tanggalKeberangkatan">
+                        <v-spacer></v-spacer>
+                        <v-btn @click="dialogDateKeberangkatan = false" color="red darken-1">
+                            <span style="color: white;">Batal</span>
+                        </v-btn>
+                        <v-btn @click="dialogDateKeberangkatan = false" color="green">
+                            <span style="color: white;">Simpan</span>
+                        </v-btn>
+                    </v-date-picker>
+                </v-dialog>
+                <v-dialog v-model="dialogDateTiba" width="300">
+                    <v-date-picker show-current v-model="form.tanggalTiba">
+                        <v-spacer></v-spacer>
+                        <v-btn @click="dialogDateTiba = false" color="red darken-1">
+                            <span style="color: white;">Batal</span>
+                        </v-btn>
+                        <v-btn @click="dialogDateTiba = false" color="green">
+                            <span style="color: white;">Simpan</span>
+                        </v-btn>
+                    </v-date-picker>
+                </v-dialog>
         </div>
+        <v-snackbar v-model="snackbar" :color="color" timeout="2000" bottom>
+            {{ error_message }}
+        </v-snackbar>
     </v-main>
 </template> 
 <style lang="css">
     @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@800&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
-    .bg {
+.bg {
     background-color: powderblue;
     height: 100vh;
 }
-
-
     thead tr th span {
         font-size: 160% !important;
         font-family: Poppins !important;
@@ -72,12 +153,18 @@
 
 </style>
 <script>
+
     export default{
         data(){
             return{
+                dialog: false,
+                dialogDateKeberangkatan: false,
+                dialogDateTiba: false,
+                snackbar: false,
+                selectedId: '',
+                formType: 0, 
                 headers: [
                     { text: "Nama", align: "start", sortable: true, value: "name"},
-                    { text: "User", value: 'user_id'},
                     { text: "From", value: 'from_id'},
                     { text: "To", value: 'to_id'},
                     { text: "Kelas", value: 'kelas'},
@@ -87,7 +174,32 @@
                     { text: "Jam Tiba", value: 'jam_tiba'},
                     { text: "Action", value:'actions'},
                 ],
-                Buses: [],
+                Pesawats: [],
+                form: {
+                    name: '',
+                    asal: '',
+                    tujuan: '',
+                    tanggalKeberangkatan: '',
+                    tanggalTiba: '',
+                    jamKeberangkatan: '',
+                    jamTiba: '',    
+                    kelas: '',
+                },
+                kotas:
+                [
+                    {text: "Yogyakarta", value:1},
+                    {text: "Jakarta", value:2},
+                    {text: "Bandung", value:3},
+                    {text: "Surabaya", value:4},
+                    {text: "Purwokerto", value:5},
+                    {text: "Solo", value:6},
+                ],
+                kelas:
+                [
+                    {text: "Ekonomi", value:1},
+                    {text: "Bisnis", value:2},
+                    {text: "First Class", value:3}
+                ],
             };
         },
         methods: {
@@ -98,68 +210,104 @@
                     // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
                     // }
                 }).then(response => {
-                    this.Buses = response.data.data;
+                    this.Pesawats = response.data.data;
                 })
-                },
+            },
+            closeDialog() {
+                this.dialog = false;
+                this.formType = 0;
+                this.$refs.form.reset();
+            },
+            saveData(){
+                if(this.formType==0){
+                    this.$http.post(this.$api + '/pesawats', {
+                        name : this.form.name,
+                        user_id: 3,
+                        from_id: this.form.asal,
+                        to_id: this.form.tujuan,
+                        kelas: this.form.kelas,
+                        jadwal_keberangkatan: this.form.tanggalKeberangkatan,
+                        jam_keberangkatan : this.form.jamKeberangkatan,
+                        jadwal_tiba: this.form.tanggalTiba,
+                        jam_tiba : this.form.jamTiba
+                    }).then(response => {
+                        this.error_message = '\nBerhasil menambahkan pesawat'
+                        // this.snackbar = true
+                        this.error_message = response.data.message
+                        //  this.color = "green"
+                        setTimeout(() => this.isHidden = false, 2000);
+                        this.reload()
+                    }).catch((error) => {
+                        this.error_message = error.response.data.message
+                        this.snackbar = true
+                        this.color = "red"
+                        this.closeDialog()
+                    })
+                }else{
+                    this.$http.post(this.$api + '/pesawats/'+ this.selectedId, {
+                        name : this.form.name,
+                        from_id: this.form.asal,
+                        to_id: this.form.tujuan,
+                        kelas: this.form.kelas,
+                        jadwal_keberangkatan: this.form.tanggalKeberangkatan,
+                        jam_keberangkatan : this.form.jamKeberangkatan,
+                        jadwal_tiba: this.form.tanggalTiba,
+                        jam_tiba : this.form.jamTiba
+                    })
+                    .then(response => {
+                        this.formType=0
+                        this.error_message = response.data.message;
+                        // this.color = "green"
+                        // this.clear()
+                        // this.snackbar = true;
+                        setTimeout(() => this.isHidden = false, 2000);
+                        this.reload()
+                    })
+                    .catch((error)=>{
+                        this.formType=0
+                        this.error_message = error.response.data.message;
+                        this.snackbar = true;
+                        this.color = "red"
+                        this.closeDialog()
+                    });
+                }
+                
+                
+                
+            },
+            reload(){
+                setTimeout(() => this.isHidden = false, 2000);
+                window.location.reload();
+            },
+            deleteBus(id){
+                this.$http.delete(this.$api + `/pesawats/${id}`)
+                .then(response => {
+                    this.error_message = '\nBerhasil menambahkan pesawat'
+                     //this.snackbar = true
+                    this.error_message = response.data.message
+                    this.reload()
+                })
+            },
+            editHandler(item){
+                this.temp1 = 
+
+                this.selectedId = item.id;
+                this.formType = 1;
+                this.form.name = item.name;
+                this.form.jamTiba = item.jam_tiba;
+                this.form.jamKeberangkatan = item.jam_keberangkatan;
+                //this.form.kelas = this.kelas[item.kelas-1];
+                this.form.tanggalKeberangkatan = item.jadwal_keberangkatan;
+                this.form.tanggalTiba = item.jadwal_tiba;
+                //kurang ini
+                // this.form.asal = this.kotas[item.from_id-1];
+                // this.form.tujuan = this.kotas[item.to_id-1];
+                this.dialog = true;  
+            }
         },
         mounted() {
             this.readData();
         },
-        
     }
-
-    
 </script>
-    <!--
-   
-    <script> 
     
-    import { onMounted, ref } from 'vue' 
-    export default { 
-        data(){
-            return{
-                selectedId : ''
-            }
-        },
-        setup() { 
-            //reactive state 
-            let buses = ref([]) 
-            //mounted 
-            onMounted(() => { 
-                //get API from Laravel Backend 
-                axios.get('http://localhost:8000/api/buses') 
-                    .then(response => { 
-                        //assign state posts with response data 
-                        buses.value = response.data.data }
-                        ).catch(error => { 
-                            console.log(error.response.data) }) 
-                        }) 
-                        //return 
-                        return { buses } 
-                 },
-            
-                 methods:{
-                    deletePegawai(id){
-                        let buses = ref([]) 
-                        axios.delete(`http://localhost:8000/api/buses/${id}`);
-                        axios.get('http://localhost:8000/api/buses') 
-                    .then(response => { 
-                        //assign state posts with response data 
-                        buses.value = response.data.data 
-                        location.reload();}
-                        ).catch(error => { 
-                            console.log(error.response.data) }) 
-                        
-                               
-                 },
-                 activate(){
-                    setTimeout(() => this.isHidden = false, 10000);
-                 }
-            
-            }
-        
-        }               
-    </script> 
-    <style> 
-</style> 
--->

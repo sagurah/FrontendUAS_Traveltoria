@@ -99,39 +99,39 @@ const router = new VueRouter({
     ]
 })
 
-router.beforeEach((to, from, next) => {
-    if(localStorage.getItem("id") != null){
-        if(to.name=="LoginPage" || to.name=="RegisterPage"){
-            next('')
-            document.to.meta.title = "Dashboard"
-        }else{
-            if(localStorage.getItem("type")!=1){
-                //buat customer
-                next('')
-                document.to.meta.title = "Dashboard"
-            }else if(localStorage.getItem("type")!=2){
-                //buat maskapai pesawat
-                next('')
-                document.to.meta.title = "Dashboard"
-            }else if(localStorage.getItem("type")!=3){
-                //buat maskapai kereta
-                next('')
-                document.to.meta.title = "Dashboard"
-            }else{
-                //buat agen bus
-                next('')
-                document.to.meta.title = "Dashboard"
-            }
-        }
-    }else{
-        if(to.name=="DashboardMain" || to.name=="DashboardMain" || to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="ProfileView"){
-            next('login')
-            document.to.meta.title = "Login Page"
-        }
-    }
-    document.title = to.meta.title
-    next()
-});
+// router.beforeEach((to, from, next) => {
+//     if(localStorage.getItem("id") != null){
+//         if(to.name=="LoginPage" || to.name=="RegisterPage"){
+//             next('')
+//             document.to.meta.title = "Dashboard"
+//         }else{
+//             if(localStorage.getItem("type")!=1){
+//                 //buat customer
+//                 next('')
+//                 document.to.meta.title = "Dashboard"
+//             }else if(localStorage.getItem("type")!=2){
+//                 //buat maskapai pesawat
+//                 next('')
+//                 document.to.meta.title = "Dashboard"
+//             }else if(localStorage.getItem("type")!=3){
+//                 //buat maskapai kereta
+//                 next('')
+//                 document.to.meta.title = "Dashboard"
+//             }else{
+//                 //buat agen bus
+//                 next('')
+//                 document.to.meta.title = "Dashboard"
+//             }
+//         }
+//     }else{
+//         if(to.name=="DashboardMain" || to.name=="DashboardMain" || to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="ProfileView"){
+//             next('login')
+//             document.to.meta.title = "Login Page"
+//         }
+//     }
+//     document.title = to.meta.title
+//     next()
+// });
 
 // router.beforeEach((to, from, next) => {
 //     if(to.name != "LoginPage" && localStorage.getItem("token") == null && to.name!="RegisterPage" && to.name!= "LandingPage"){

@@ -79,11 +79,8 @@
             if (this.$refs.form.validate()) {
                 var url = this.$api + '/logins';
                 this.$http.post(url, {
-                        email : this.form.email,
-                        password : this.form.password,
-                    // headers: {
-                    // 'Authorization' : 'Bearer ' + localStorage.getItem('token')
-                    // }
+                    email : this.form.email,
+                    password : this.form.password,
                 }).then((response)=> {
                     localStorage.setItem("id", response.data.data.id);
                     localStorage.setItem("type", response.data.data.type);
