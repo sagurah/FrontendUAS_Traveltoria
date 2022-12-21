@@ -77,15 +77,39 @@ export default {
         return {
             dialogLogout: false,
             drawer: true,
-            menus: [
+            users: [
                 { title: 'Kereta', icon: 'mdi-train', to: '/kereta' },
                 { title: 'Pesawat', icon: 'mdi-airplane', to: '/pesawat' },
                 { title: 'Bus', icon: 'mdi-bus', to: '/bus' },
             ],
+            keretas: [
+                { title: 'Kereta', icon: 'mdi-train', to: '/keretas' },
+            ],
+            buses: [
+                { title: 'Bus', icon: 'mdi-bus', to: '/buses' },
+            ],
+            pesawats: [
+                { title: 'Pesawat', icon: 'mdi-airplane', to: '/pesawats' },
+            ],
+            menus: [],
 
             accountMenus: [
                 { title: 'Akun Saya', icon: 'mdi-account', to: '/akun' },
             ]
+        }
+    },
+    mounted(){
+        if(localStorage.getItem("type")==1){
+            this.menus = this.users;
+        }
+        if(localStorage.getItem("type")==3){
+            this.menus = this.keretas;
+        }
+        if(localStorage.getItem("type")==2){
+            this.menus = this.pesawats;
+        }
+        if(localStorage.getItem("type")==4){
+            this.menus = this.buses;
         }
     },
     methods: {
