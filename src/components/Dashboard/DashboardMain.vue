@@ -54,5 +54,10 @@
                 loading: false,
                 selection: 1,
             }),
+            mounted(){
+                if(localStorage.getItem("verified")==0){
+                    this.$router.push('/verif');
+                }
+            }
         };
     </script>

@@ -84,6 +84,7 @@
                 }).then((response)=> {
                     localStorage.setItem("id", response.data.data.id);
                     localStorage.setItem("type", response.data.data.type);
+                    localStorage.setItem("verified", response.data.data.verif);
                     this.error_message = response.data.message;
                     this.color = "green"
                     this.clear()

@@ -89,6 +89,9 @@ export default{
         },
     },
     mounted() {
+        if(localStorage.getItem("verified")==0){
+            this.$router.push('/verif');
+        }
         this.readDataUSer();
     }
 }

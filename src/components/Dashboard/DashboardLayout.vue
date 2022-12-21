@@ -88,8 +88,8 @@ export default {
             buses: [
                 { title: 'Bus', icon: 'mdi-bus', to: '/buses' },
             ],
-            pesawats: [
-                { title: 'Pesawat', icon: 'mdi-airplane', to: '/pesawats' },
+            Pesawats: [
+                { title: 'Pesawat', icon: 'mdi-bus', to: '/pesawats' },
             ],
             menus: [],
 
@@ -111,6 +111,12 @@ export default {
         if(localStorage.getItem("type")==4){
             this.menus = this.buses;
         }
+        
+        
+        // if(localStorage.getItem("Type")==1){
+        //     let copy = JSON.parse(JSON.stringify(this.users));
+        //     this.menus = this.users;
+        // }
     },
     methods: {
         btnlogout(){
