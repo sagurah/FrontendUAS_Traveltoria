@@ -88,7 +88,7 @@ export default {
             buses: [
                 { title: 'Bus', icon: 'mdi-bus', to: '/buses' },
             ],
-            Pesawats: [
+            pesawats: [
                 { title: 'Pesawat', icon: 'mdi-bus', to: '/pesawats' },
             ],
             menus: [],
