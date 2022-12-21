@@ -117,30 +117,32 @@ router.beforeEach((to, from, next) => {
             next('dashboard')
             document.to.meta.title = "DashboardMain"
         }
-        if(localStorage.getItem("type")!=1){
-            if(to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="KeranjangView"){
-                next('dashboard')
-                document.to.meta.title = "DashboardMain"
+            if(localStorage.getItem("type")!=1){
+                if(to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="KeranjangView"){
+                    next('dashboard')
+                    document.to.meta.title = "DashboardMain"
+                }
             }
-        }
-        if(localStorage.getItem("type")!=2){
-            if(to.name=="Pesawat Page"){
-                next('dashboard')
-                document.to.meta.title = "DashboardMain"
+            if(localStorage.getItem("type")!=2){
+                if(to.name=="Pesawat Page"){
+                    next('dashboard')
+                    document.to.meta.title = "DashboardMain"
+                }
             }
-        }
-        if(localStorage.getItem("type")!=3){
-            if(to.name=="Kereta Page"){
-                next('dashboard')
-                document.to.meta.title = "DashboardMain"
+            if(localStorage.getItem("type")!=3){
+                if(to.name=="Kereta Page"){
+                    next('dashboard')
+                    document.to.meta.title = "DashboardMain"
+                }
             }
-        }
-        if(localStorage.getItem("type")!=4){
-            if(to.name=="BusPage"){
-                next('dashboard')
-                document.to.meta.title = "DashboardMain"
+            if(localStorage.getItem("type")!=4){
+                if(to.name=="BusPage"){
+                    next('dashboard')
+                    document.to.meta.title = "DashboardMain"
+                }
             }
-        }
+        
+        
     }
     document.title = to.meta.title
     next()
