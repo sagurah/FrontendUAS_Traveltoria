@@ -114,12 +114,12 @@ const router = new VueRouter({
 //||to.name==""
 router.beforeEach((to, from, next) => {
     if(localStorage.getItem("id")==null){
-        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView" || to.name=="Verified    "){
+        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView" || to.name=="Verified"){
             next('login')
             document.to.meta.title = "Login Page"
         }
     }else{  
-        if(to.name=="RegisterPage" || to.name=="LoginPage" || to.name=="LandingPage" ){
+        if(to.name=="RegisterPage" || to.name=="LoginPage" || to.name=="LandingPage" || to.name=="Verification" || to.name=="Verified" ){
             next('dashboard')
             document.to.meta.title = "DashboardMain"
         }
