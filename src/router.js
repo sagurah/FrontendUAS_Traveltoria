@@ -60,6 +60,12 @@ const router = new VueRouter({
             component: importComponent("NotVerif")
         },
         {
+            path: "/verified",
+            name: "Verified",
+            meta: {title: 'Verified Page'},
+            component: importComponent("VerifiedPage")
+        },
+        {
             path: "/dashboard",
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
@@ -108,7 +114,7 @@ const router = new VueRouter({
 //||to.name==""
 router.beforeEach((to, from, next) => {
     if(localStorage.getItem("id")==null){
-        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView"){
+        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView" || to.name=="Verification" || to.name=="KeranjangView" || to.name=="Verified    "){
             next('login')
             document.to.meta.title = "Login Page"
         }
