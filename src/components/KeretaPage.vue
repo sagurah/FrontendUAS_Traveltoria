@@ -55,7 +55,7 @@
                         <v-divider></v-divider>
                         <v-container class="mt-3">
                                 <v-card-content>
-                                    <v-text-field required v-model="form.name" outlined color="teal" label="Nama Bus"></v-text-field>
+                                    <v-text-field required v-model="form.name" outlined color="teal" label="Nama Kereta"></v-text-field>
                                     <v-row>
                                         <v-col>
                                             <v-select :items="kotas" required v-model="form.asal" outlined color="teal" label="Asal" prepend-inner-icon="mdi-bus"></v-select>
@@ -84,7 +84,7 @@
                                 </v-card-content>
                                 <v-card-actions class="justify-end">
                                     <v-btn color="#EEEEEE" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 900; color:#001D38;" @click="closeDialog()"> Cancel </v-btn>
-                                    <v-btn color="#93A9D1" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 700; color:#F7CACA;" @click="saveData()"> Save </v-btn> 
+                                    <v-btn color="teal" large style="font-family: Poppins; font-size: 20px; text-transform: capitalize; font-weight: 700; color:#F7CACA;" @click="saveData()"> Save </v-btn> 
                                 </v-card-actions>
                         </v-container>
                     </v-card>
