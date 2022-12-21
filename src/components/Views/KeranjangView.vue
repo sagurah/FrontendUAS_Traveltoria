@@ -57,7 +57,29 @@ export default{
                 { text: "Aksi", value: "aksi" },
             ],
             data: [],
+            keretas:[],
+            pesawats:[],
+            buses:[],
         }
+    },
+    methods:{
+        readData(){
+            this.$http.get(this.$api + '/ticketKereta', {
+            }).then(response => {
+                this.data = response.data.data;
+            })
+
+            this.$http.get(this.$api + '/ticketBus', {
+            }).then(response => {
+                this.keretas = response.data.data;
+            })
+
+            this.$http.get(this.$api + '/ticketPesawat', {
+            }).then(response => {
+                this.keretas = response.data.data;
+            })
+            
+        },
     }
 }
 </script>

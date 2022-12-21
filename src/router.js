@@ -12,7 +12,7 @@ const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/landing",
+            path: "/",
             name: "LandingPage",
             meta: {title: 'Landing Page'},
             component: importComponent("LandingPage"),
@@ -54,11 +54,17 @@ const router = new VueRouter({
             component: importComponent("ContactPage")
         },
         {
-            path: "/",
+            path: "/verif",
+            name: "Verification",
+            meta: {title: 'Verification Page'},
+            component: importComponent("NotVerif")
+        },
+        {
+            path: "/dashboard",
             component: importComponent("Dashboard/DashboardLayout"),
             children : [
                 {
-                    path: "/",
+                    path: "/dashboard",
                     name: "DashboardMain",
                     meta: {title: "Dashboard"},
                     component: importComponent("Dashboard/DashboardMain"),
@@ -99,39 +105,46 @@ const router = new VueRouter({
     ]
 })
 
-// router.beforeEach((to, from, next) => {
-//     if(localStorage.getItem("id") != null){
-//         if(to.name=="LoginPage" || to.name=="RegisterPage"){
-//             next('')
-//             document.to.meta.title = "Dashboard"
-//         }else{
-//             if(localStorage.getItem("type")!=1){
-//                 //buat customer
-//                 next('')
-//                 document.to.meta.title = "Dashboard"
-//             }else if(localStorage.getItem("type")!=2){
-//                 //buat maskapai pesawat
-//                 next('')
-//                 document.to.meta.title = "Dashboard"
-//             }else if(localStorage.getItem("type")!=3){
-//                 //buat maskapai kereta
-//                 next('')
-//                 document.to.meta.title = "Dashboard"
-//             }else{
-//                 //buat agen bus
-//                 next('')
-//                 document.to.meta.title = "Dashboard"
-//             }
-//         }
-//     }else{
-//         if(to.name=="DashboardMain" || to.name=="DashboardMain" || to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="ProfileView"){
-//             next('login')
-//             document.to.meta.title = "Login Page"
-//         }
-//     }
-//     document.title = to.meta.title
-//     next()
-// });
+//||to.name==""
+router.beforeEach((to, from, next) => {
+    if(localStorage.getItem("id")==null){
+        if(to.name=="DashboardMain" || to.name=="BusView"||to.name=="PesawatView"||to.name=="KeretaView" || to.name=="BusPage"||to.name=="Pesawat Page" || to.name=="Kereta Page" || to.name=="ProfileView"){
+            next('login')
+            document.to.meta.title = "Login Page"
+        }
+    }else{
+        if(to.name=="RegisterPage" || to.name=="LoginPage" || to.name=="LandingPage" ){
+            next('dashboard')
+            document.to.meta.title = "DashboardMain"
+        }
+        if(localStorage.getItem("type")!=1){
+            if(to.name=="KeretaView" || to.name=="PesawatView" || to.name=="BusView" || to.name=="KeranjangView"){
+                next('dashboard')
+                document.to.meta.title = "DashboardMain"
+            }
+        }
+        if(localStorage.getItem("type")!=2){
+            if(to.name=="Pesawat Page"){
+                next('dashboard')
+                document.to.meta.title = "DashboardMain"
+            }
+        }
+        if(localStorage.getItem("type")!=3){
+            if(to.name=="Kereta Page"){
+                next('dashboard')
+                document.to.meta.title = "DashboardMain"
+            }
+        }
+        if(localStorage.getItem("type")!=4){
+            if(to.name=="BusPage"){
+                next('dashboard')
+                document.to.meta.title = "DashboardMain"
+            }
+        }
+    }
+    document.title = to.meta.title
+    next()
+});
 
 // router.beforeEach((to, from, next) => {
 //     if(to.name != "LoginPage" && localStorage.getItem("token") == null && to.name!="RegisterPage" && to.name!= "LandingPage"){

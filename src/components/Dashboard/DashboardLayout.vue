@@ -91,6 +91,7 @@ export default {
     methods: {
         btnlogout(){
             localStorage.removeItem('id');
+            localStorage.removeItem('type');
             this.$router.push('/login');
         }
     }

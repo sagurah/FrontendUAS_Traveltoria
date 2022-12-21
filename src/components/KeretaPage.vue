@@ -289,19 +289,17 @@
                 })
             },
             editHandler(item){
-                this.temp1 = 
 
                 this.selectedId = item.id;
                 this.formType = 1;
                 this.form.name = item.name;
                 this.form.jamTiba = item.jam_tiba;
                 this.form.jamKeberangkatan = item.jam_keberangkatan;
-                //this.form.kelas = this.kelas[item.kelas-1];
+                this.form.kelas = this.kelas[item.kelas-1].value;
                 this.form.tanggalKeberangkatan = item.jadwal_keberangkatan;
                 this.form.tanggalTiba = item.jadwal_tiba;
-                //kurang ini
-                // this.form.asal = this.kotas[item.from_id-1];
-                // this.form.tujuan = this.kotas[item.to_id-1];
+                this.form.asal = this.kotas[item.from_id-1].value;
+                this.form.tujuan = this.kotas[item.to_id-1].value;
                 this.dialog = true;  
             }
         },
